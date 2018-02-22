@@ -1,0 +1,2 @@
+# Excluding node modules (huge file tree).
+/node_modules/*
