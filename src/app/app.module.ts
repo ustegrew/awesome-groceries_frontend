@@ -3,14 +3,22 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { AppRouterModule } from './/app-router.module';
+import { TLandingComponent } from './components/tlanding/tlanding.component';
+import { TDetailsComponent } from './components/tdetails/tdetails.component';
+import { TCartComponent } from './components/tcart/tcart.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TLandingComponent,
+    TDetailsComponent,
+    TCartComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
