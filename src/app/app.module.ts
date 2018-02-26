@@ -15,6 +15,7 @@ import { TProductPhotoFrameComponent } from './components/widgets/tproduct-photo
 import { TViewDetailsButtonComponent } from './components/widgets/tview-details-button/tview-details-button.component';
 import { TAddToCartButtonComponent } from './components/widgets/tadd-to-cart-button/tadd-to-cart-button.component';
 import { TProductDetailsPanelComponent } from './components/widgets/tproduct-details-panel/tproduct-details-panel.component';
+import { TFourOhFourComponent } from './components/pages/tfour-oh-four/tfour-oh-four.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { TProductDetailsPanelComponent } from './components/widgets/tproduct-det
     TProductPhotoFrameComponent,
     TViewDetailsButtonComponent,
     TAddToCartButtonComponent,
-    TProductDetailsPanelComponent
+    TProductDetailsPanelComponent,
+    TFourOhFourComponent
   ],
   imports: [
     BrowserModule,

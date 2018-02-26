@@ -1,0 +1,51 @@
+#table-00
+{
+    width:              100%;
+}
+
+#table-00-tr-00-td-00
+{
+    width:              50%;
+    text-align:         left;
+    padding:            0;
+}
+
+#table-00-tr-00-td-01
+{
+    width:              50%;
+    text-align:         right;
+    padding:            0;
+}
+
+#table-01
+{
+    width:              100%;
+}
+
+#table-01-tr-00-td-00
+{
+    width:              50%;
+    text-align:         left;
+}
+
+#table-01-tr-00-td-01
+{
+  width:                50%;
+  text-align:           right;
+}
+
+#flowpanel
+{
+    margin-top:         20px;
+    border-style:       inset;
+    border-width:       2px;
+    height:             600px;
+    vertical-align:     top;
+    overflow-y:         scroll;
+}
+
+#flowpanel > div
+{
+    float:              left;
+    padding:            10px;
+}
