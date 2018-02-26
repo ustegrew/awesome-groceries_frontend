@@ -1,9 +1,9 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TLandingComponent }    from './components/tlanding/tlanding.component';
-import { TDetailsComponent }    from './components/tdetails/tdetails.component';
-import { TCartComponent }       from './components/tcart/tcart.component';
+import { TLandingComponent }    from '../../pages/tlanding/tlanding.component';
+import { TDetailsComponent }    from '../../pages/tdetails/tdetails.component';
+import { TCartComponent }       from '../../pages/tcart/tcart.component';
 
 const kRoutes: Routes =
 [
@@ -14,11 +14,11 @@ const kRoutes: Routes =
 ];
 
 @NgModule({
-  imports: 
+  imports:
   [
       RouterModule.forRoot (kRoutes)
   ],
-  exports: 
+  exports:
   [
       RouterModule
   ],
