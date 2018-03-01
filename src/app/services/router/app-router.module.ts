@@ -1,11 +1,12 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TLandingComponent }    from '../../pages/tlanding/tlanding.component';
-import { TDetailsComponent }    from '../../pages/tdetails/tdetails.component';
-import { TCartComponent }       from '../../pages/tcart/tcart.component';
-import { TFourOhFourComponent } from '../../pages/tfour-oh-four/tfour-oh-four.component'
+import { TLandingComponent }    from '../../components/pages/tlanding/tlanding.component';
+import { TDetailsComponent }    from '../../components/pages/tdetails/tdetails.component';
+import { TCartComponent }       from '../../components/pages/tcart/tcart.component';
+import { TFourOhFourComponent } from '../../components/pages/tfour-oh-four/tfour-oh-four.component'
 
+/* Unique setup to accomodate for github pages */
 const kRoutes: Routes =
 [
     {path: 'landing',         component: TLandingComponent          },
