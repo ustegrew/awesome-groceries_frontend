@@ -42,6 +42,7 @@
     height:             600px;
     vertical-align:     top;
     overflow-y:         scroll;
+    font-family:        sans-serif;
 }
 
 #flowpanel > div

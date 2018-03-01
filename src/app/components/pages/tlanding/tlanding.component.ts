@@ -1,4 +1,5 @@
 import { Component, OnInit                } from '@angular/core';
+import { TProductStoreMockService         } from '../../../services/product/tproduct-store-mock.service';
 import { TLogoComponent                   } from '../../widgets/tlogo/tlogo.component';
 import { TGoCartButtonComponent           } from '../../widgets/tgo-cart-button/tgo-cart-button.component';
 import { TCategoryBoxComponent            } from '../../widgets/tcategory-box/tcategory-box.component';
@@ -12,7 +13,7 @@ import { TProductDetailsPanelComponent    } from '../../widgets/tproduct-details
 })
 export class TLandingComponent implements OnInit
 {
-    constructor()
+    constructor (public store: TProductStoreMockService)
     {
 
     }

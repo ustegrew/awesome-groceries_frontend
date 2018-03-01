@@ -24,13 +24,13 @@ export class TProduct
         urlPhoto:      string
     )
     {
-        fDetailName     = detailName;
-        fID             = id;
-        fProductType    = productType;
-        fPrice          = price;
-        fPriceUnit      = priceUnit;
-        fOriginCountry  = originCountry;
-        fURLPhotoThumb  = urlPhotoThumb;
-        fURLPhoto       = urlPhoto;
+        this.fDetailName     = detailName;
+        this.fID             = id;
+        this.fProductType    = productType;
+        this.fPrice          = price;
+        this.fPriceUnit      = priceUnit;
+        this.fOriginCountry  = originCountry;
+        this.fURLPhotoThumb  = urlPhotoThumb;
+        this.fURLPhoto       = urlPhoto;
     }
 }

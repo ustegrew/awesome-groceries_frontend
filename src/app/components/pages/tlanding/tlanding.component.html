@@ -1,3 +1,4 @@
+
 <!-- TODO: Migrate to div + css table layout. For now, table worx. -->
 <table id="table-00">
     <tr>
@@ -22,15 +23,5 @@
 </table> 
 <hr/>
 <div id="flowpanel">
-    <div>item</div>
-    <div>item</div>
-    <div>item</div>
-    <div>item</div>
-    <div>item</div>
-    <div>item</div>
-    <div>item</div>
-    <div>item</div>
-    <div>item</div>
-    <div>item</div>
-    <div>item</div>
+    <div *ngFor="let article of store.getArticles()">{{article.fDetailName}}</div>
 </div>
