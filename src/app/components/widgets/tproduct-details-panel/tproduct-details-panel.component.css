@@ -1,0 +1,31 @@
+#root
+{
+    border:                 2px #cccccc solid;
+    border-radius:          10px;
+    height:                 200px;
+    width:                  250px;
+    margin-left:            25px;
+    margin-right:           25px;
+}
+
+#title
+{
+    background-color:       #cccccc;
+    padding:                10px;
+}
+
+#title-name
+{
+    font-size:              1.2em;
+    font-family:            sans-serif;
+    color:                  #3333ff;
+    float:                  left;
+}
+
+#title-price
+{
+    background-color:       #3366ff;
+    border-radius:          5px;
+    color:                  #ffffff;
+    width:                  6em;
+}

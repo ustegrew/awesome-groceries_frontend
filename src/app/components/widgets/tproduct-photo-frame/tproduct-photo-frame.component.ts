@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { TProduct                 } from '../../../lib/types/product/tproduct';
 
 @Component({
   selector: 'app-tproduct-photo-frame',
   templateUrl: './tproduct-photo-frame.component.html',
   styleUrls: ['./tproduct-photo-frame.component.css']
 })
-export class TProductPhotoFrameComponent implements OnInit {
+export class TProductPhotoFrameComponent implements OnInit 
+{
+    @Input() urlPhoto : string;
+    
+    constructor() 
+    {
+    }
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+    ngOnInit() 
+    {
+    }
 }
