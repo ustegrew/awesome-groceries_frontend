@@ -1,16 +1,17 @@
 <div id="root">
-	<div id="title">
-	    <div id="title-name">
+	<div id="root-title">
+	    <div id="root-title-name">
 	        {{article.fProductType}}
 	    </div>
-	    <div id="title-price">
+	    <div id="root-title-price">
 	        <span>€{{article.fPrice}} / {{article.fPriceUnit}}</span>
 	    </div>
 	</div>
-	<div id="photo">
+	<div id="root-photo">
+		<app-tproduct-photo-frame [urlPhoto]="article.fURLPhotoThumb"></app-tproduct-photo-frame>
 	</div>
-	<hr id="divider"/>
-	<div id="menu">
+	<hr id="root-divider"/>
+	<div id="root-menu">
 		<div><app-tview-details-button></app-tview-details-button></div>
 	    <div><app-tadd-to-cart-button></app-tadd-to-cart-button></div>
 	</div>

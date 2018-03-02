@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TViewDetailsButtonComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor()
+  {
   }
 
+  ngOnInit() 
+  {
+  }
 }

@@ -18,8 +18,8 @@ export class TProductStoreMockService
                 "1.69",
                 "kg",
                 "France",
-                "apple/apple_1.jpg",
-                "apple/apple_4.jpg"
+                "assets/img/apple/apple_1.jpg",
+                "assets/img/apple/apple_4.jpg"
             )
         );
         this.fArticles.push
@@ -32,8 +32,8 @@ export class TProductStoreMockService
                 "2.25",
                 "lb",
                 "Spain",
-                "avocado/avocado_1.jpg",
-                "avocado/avocado_4.jpg"
+                "assets/img/avocado/avocado_1.jpg",
+                "assets/img/avocado/avocado_4.jpg"
             )
         );
         this.fArticles.push
@@ -46,8 +46,8 @@ export class TProductStoreMockService
                 "3.21",
                 "250g",
                 "Argentinia",
-                "beef/beef_1.jpg",
-                "beef/beef_4.jpg"
+                "assets/img/beef/beef_1.jpg",
+                "assets/img/beef/beef_4.jpg"
             )
         );
         this.fArticles.push
@@ -60,8 +60,8 @@ export class TProductStoreMockService
                 "2.99",
                 "250g",
                 "France",
-                "blueberries/blueberries_1.jpg",
-                "blueberries/blueberries_4.jpg"
+                "assets/img/blueberries/blueberries_1.jpg",
+                "assets/img/blueberries/blueberries_4.jpg"
             )
         );
         this.fArticles.push
@@ -74,8 +74,8 @@ export class TProductStoreMockService
                 "1.28",
                 "loaf",
                 "Germany",
-                "bread/bread_1.jpg",
-                "bread/bread_4.jpg"
+                "assets/img/bread/bread_1.jpg",
+                "assets/img/bread/bread_4.jpg"
             )
         );
         this.fArticles.push
@@ -88,8 +88,8 @@ export class TProductStoreMockService
                 "0.69",
                 "500g",
                 "Italy",
-                "carrot/carrot_1.jpg",
-                "carrot/carrot_4.jpg"
+                "assets/img/carrot/carrots_1.jpg",
+                "assets/img/carrot/carrots_4.jpg"
             )
         );
         this.fArticles.push
@@ -102,8 +102,8 @@ export class TProductStoreMockService
                 "2.19",
                 "Pack",
                 "France",
-                "cheese/cheese_1.jpg",
-                "cheese/cheese_4.jpg"
+                "assets/img/cheese/cheese_1.jpg",
+                "assets/img/cheese/cheese_4.jpg"
             )
         );
         this.fArticles.push
@@ -116,8 +116,8 @@ export class TProductStoreMockService
                 "3.29",
                 "500g",
                 "Spain",
-                "cherries/cherries_1.jpg",
-                "cherries/cherries_4.jpg"
+                "assets/img/cherries/cherries_1.jpg",
+                "assets/img/cherries/cherries_4.jpg"
             )
         );
         this.fArticles.push
@@ -130,8 +130,8 @@ export class TProductStoreMockService
                 "3.29",
                 "750g",
                 "Netherlands",
-                "chicken/chicken_1.jpg",
-                "chicken/chicken_4.jpg"
+                "assets/img/chicken/chicken_1.jpg",
+                "assets/img/chicken/chicken_4.jpg"
             )
         );
         this.fArticles.push
@@ -144,8 +144,8 @@ export class TProductStoreMockService
                 "1.59",
                 "250g",
                 "Italy",
-                "grapes/grapes_1.jpg",
-                "grapes/grapes_4.jpg"
+                "assets/img/grapes/grapes_1.jpg",
+                "assets/img/grapes/grapes_4.jpg"
             )
         );
         this.fArticles.push
@@ -158,8 +158,8 @@ export class TProductStoreMockService
                 "1.59",
                 "Litre",
                 "Germany",
-                "juice/juice_1.jpg",
-                "juice/juice_4.jpg"
+                "assets/img/juice/juice_1.jpg",
+                "assets/img/juice/juice_4.jpg"
             )
         );
         this.fArticles.push
@@ -172,8 +172,8 @@ export class TProductStoreMockService
                 "0.89",
                 "Pc",
                 "Germany",
-                "lettuce/lettuce_1.jpg",
-                "lettuce/lettuce_4.jpg"
+                "assets/img/lettuce/lettuce_1.jpg",
+                "assets/img/lettuce/lettuce_4.jpg"
             )
         );
         this.fArticles.push
@@ -186,8 +186,8 @@ export class TProductStoreMockService
                 "1.29",
                 "kg",
                 "Spain",
-                "orange/orange_1.jpg",
-                "orange/orange_4.jpg"
+                "assets/img/orange/oranges_1.jpg",
+                "assets/img/orange/oranges_4.jpg"
             )
         );
         this.fArticles.push
@@ -200,8 +200,8 @@ export class TProductStoreMockService
                 "1.59",
                 "kg",
                 "Spain",
-                "paprica/paprica_1.jpg",
-                "paprica/paprica_4.jpg"
+                "assets/img/paprica/paprica_1.jpg",
+                "assets/img/paprica/paprica_4.jpg"
             )
         );
         this.fArticles.push
@@ -214,8 +214,8 @@ export class TProductStoreMockService
                 "1.00",
                 "Pack",
                 "Germany",
-                "pizza/pizza_1.jpg",
-                "pizza/pizza_4.jpg"
+                "assets/img/pizza/pizza_1.jpg",
+                "assets/img/pizza/pizza_4.jpg"
             )
         );
         this.fArticles.push
@@ -228,8 +228,8 @@ export class TProductStoreMockService
                 "2.50",
                 "kg",
                 "Germany",
-                "potato/potato_1.jpg",
-                "potato/potato_4.jpg"
+                "assets/img/potato/potatos_1.jpg",
+                "assets/img/potato/potatos_4.jpg"
             )
         );
         this.fArticles.push
@@ -242,8 +242,8 @@ export class TProductStoreMockService
                 "1.50",
                 "Bunch",
                 "Germany",
-                "radish/radish_1.jpg",
-                "radish/radish_4.jpg"
+                "assets/img/radish/radish_1.jpg",
+                "assets/img/radish/radish_4.jpg"
             )
         );
         this.fArticles.push
@@ -256,8 +256,8 @@ export class TProductStoreMockService
                 "2.49",
                 "kg",
                 "Germany",
-                "strawberries/strawberries_1.jpg",
-                "strawberries/strawberries_4.jpg"
+                "assets/img/strawberries/strawberries_1.jpg",
+                "assets/img/strawberries/strawberries_4.jpg"
             )
         );
         this.fArticles.push
@@ -270,8 +270,8 @@ export class TProductStoreMockService
                 "1.29",
                 "Pack",
                 "Netherlands",
-                "tomatos/tomatos_1.jpg",
-                "tomatos/tomatos_4.jpg"
+                "assets/img/tomato/tomatos_1.jpg",
+                "assets/img/tomato/tomatos_4.jpg"
             )
         );
     }
