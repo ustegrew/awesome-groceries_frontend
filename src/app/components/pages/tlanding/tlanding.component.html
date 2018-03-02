@@ -1,28 +1,27 @@
-<!-- TODO: Migrate to div + css table layout. For now, table worx. -->
-<table id="table-00">
-    <tr>
-        <td id="table-00-tr-00-td-00">
-            <app-tlogo></app-tlogo>
-        </td>
-        <td id="table-00-tr-00-td-01">
+<div id="root">
+	<div id="root-a">
+		<div>
+		    <app-tlogo></app-tlogo>
+		</div>
+        <div>
             <app-tgo-cart-button></app-tgo-cart-button>
-        </td>
-    </tr>
-</table>
-<hr/>
-<table id="table-01">
-    <tr>
-        <td id="table-01-tr-00-td-00">
-            <app-tcategory-box></app-tcategory-box>
-        </td>
-        <td id="table-01-tr-00-td-01">
-            <app-tsearch></app-tsearch>
-        </td>
-    </tr>
-</table> 
-<hr/>
-<div id="flowpanel">
-    <div *ngFor="let article of store.getArticles()">
-        <app-tproduct-details-panel [article] = "article"></app-tproduct-details-panel>
+        </div>
+    </div>
+    <div><hr/></div>
+	<div id="root-b">
+	    <div>
+			<app-tcategory-box></app-tcategory-box>
+	    </div>
+        <div>
+	        <app-tsearch></app-tsearch>
+        </div>
+	</div>
+	<div><hr/></div>
+    <div id="root-c">
+	    <!-- FIXME: Product buttons inside block to be left aligned, and
+	                whole block of product buttons to be centered in flow panel. -->
+	    <div *ngFor="let article of store.getArticles()" style="padding: 10px;">
+	        <app-tproduct-details-panel [article] = "article"></app-tproduct-details-panel>
+	    </div>
     </div>
 </div>
