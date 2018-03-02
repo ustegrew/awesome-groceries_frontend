@@ -12,6 +12,7 @@
 {
     background-color:       #cccccc;
     padding:                10px;
+    height:                 1.5em;
 }
 
 #title-name
@@ -20,6 +21,7 @@
     font-family:            sans-serif;
     color:                  #3333ff;
     float:                  left;
+    vertical-align:         middle;
 }
 
 #title-price
@@ -27,5 +29,17 @@
     background-color:       #3366ff;
     border-radius:          5px;
     color:                  #ffffff;
-    width:                  6em;
+    width:                  7em;
+    height:                 1.8em;
+    float:                  right;
+    text-align:             center;
+    line-height:            1.5em;
+    vertical-align:         middle;
+}
+
+#title-price > span
+{
+    display:                inline-block;
+    vertical-align:         middle;
+    line-height:            normal;
 }
