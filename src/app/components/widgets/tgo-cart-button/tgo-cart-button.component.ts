@@ -5,11 +5,19 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './tgo-cart-button.component.html',
   styleUrls: ['./tgo-cart-button.component.css']
 })
-export class TGoCartButtonComponent implements OnInit {
+export class TGoCartButtonComponent implements OnInit 
+{
+    constructor() 
+    {
+      
+    }
 
-  constructor() { }
+    ngOnInit() 
+    {
+    }
 
-  ngOnInit() {
-  }
-
+    gotClick () : void
+    {
+        console.log ("Go to cart");
+    }
 }

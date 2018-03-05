@@ -17,4 +17,16 @@ export class TProductDetailsPanelComponent implements OnInit
     ngOnInit() 
     {
     }
+
+    /*
+    article.
+        fDetailName:    string;     // e.g. "Bluegold"
+        fID:            string;     // uid
+        fProductType:   string;     // e.g. "Blueberries"
+        fPrice:         string;     // money, money, money... must be funny...
+        fPriceUnit:     string;     // e.g. "per lb"
+        fOriginCountry: string;     // e.g. "USA"
+        fURLPhotoThumb: string;     // Thumbnail
+        fURLPhoto:      string;     // Large photo
+    */
 }
