@@ -10,7 +10,7 @@
     <div><hr/></div>
 	<div id="root-b">
 	    <div>
-			<app-tcategory-box></app-tcategory-box>
+			<app-tcategory-box (onChangeCategory)="onChangeCategory ($event)"></app-tcategory-box>
 	    </div>
         <div>
 	        <app-tsearch></app-tsearch>
@@ -20,7 +20,7 @@
     <div id="root-c">
 	    <!-- FIXME: Product buttons inside block to be left aligned, and
 	                whole block of product buttons to be centered in flow panel. -->
-	    <div *ngFor="let article of store.getArticles()">
+	    <div *ngFor="let article of getObserved (); trackBy: getObserved">
             <app-tproduct-details-panel [article] = "article"></app-tproduct-details-panel>
 	    </div>
     </div>

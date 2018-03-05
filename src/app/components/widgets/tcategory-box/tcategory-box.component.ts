@@ -1,5 +1,5 @@
-import { Component, OnInit          } from '@angular/core';
-import { TProductStoreMockService   } from '../../../services/product/tproduct-store-mock.service';
+import { Component, OnInit, Output, EventEmitter    } from '@angular/core';
+import { TProductStoreMockService                   } from '../../../services/product/tproduct-store-mock.service';
 
 @Component({
   selector: 'app-tcategory-box',
@@ -8,6 +8,8 @@ import { TProductStoreMockService   } from '../../../services/product/tproduct-s
 })
 export class TCategoryBoxComponent implements OnInit 
 {
+    @Output() onChangeCategory = new EventEmitter<string> ();
+    
     constructor (public store: TProductStoreMockService)
     {
         
@@ -15,5 +17,10 @@ export class TCategoryBoxComponent implements OnInit
 
     ngOnInit() 
     {
+    }
+    
+    onChangeValue (choice: string) : void
+    {
+        this.onChangeCategory.emit (choice);
     }
 }

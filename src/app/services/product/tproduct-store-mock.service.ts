@@ -297,7 +297,35 @@ export class TProductStoreMockService
         this._setCategories ();
     }
     
-    getArticles() : TProduct[]
+    getArticlesByCategory (category) : TProduct[]
+    {
+        let n  : number;
+        let i  : number;
+        let p  : TProduct;
+        let ret: TProduct[];
+
+        ret = [];
+        n   = this.fArticles.length;
+        if (n >= 1)
+        {
+            for (i = 0; i < n; i++)
+            {
+                p = this.fArticles [i];
+                if (p.fCategory == category)
+                {
+                    ret.push (p);
+                }
+                else if (category == "*")
+                {
+                    ret.push (p);
+                }
+            }
+        }
+        
+        return ret;
+    }
+    
+    getArticles () : TProduct[]
     {
         return this.fArticles;
     }
@@ -306,7 +334,7 @@ export class TProductStoreMockService
     {
         let ret: string[];
 
-        ret = [];
+        ret = ['*'];
         this.fCategories.forEach
         (
             function callb (item: string)
