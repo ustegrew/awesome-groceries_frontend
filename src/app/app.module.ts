@@ -43,7 +43,8 @@ import { TFourOhFourComponent }             from './components/pages/tfour-oh-fo
   [
       TProductStoreMockService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule { }
  

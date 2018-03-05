@@ -4,7 +4,8 @@ import { TProduct }                         from '../../lib/types/product/tprodu
 @Injectable()
 export class TProductStoreMockService
 {
-    private fArticles: TProduct[] = [];
+    private fArticles:      TProduct[] = [];
+    private fCategories:    Set<string>;
 
     constructor()
     {
@@ -12,6 +13,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Fruits",
                 "Golden delicious",
                 "8d79",
                 "Apples",
@@ -26,6 +28,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Vegetables",
                 "Green queen",
                 "5ce1",
                 "Avocadoes",
@@ -40,6 +43,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Meats",
                 "Argentinian massive",
                 "4142",
                 "Beef",
@@ -54,6 +58,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Fruits",
                 "Bluegold",
                 "c5a3",
                 "Blueberries",
@@ -68,6 +73,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Bread",
                 "Toaster wonder",
                 "bb69",
                 "Bread",
@@ -82,6 +88,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Vegetables",
                 "Long orange",
                 "d12c",
                 "Carrots",
@@ -96,6 +103,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Cheeses",
                 "Angletuierre",
                 "4bb5",
                 "Cheese",
@@ -110,6 +118,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Fruits",
                 "Tulares",
                 "8a80",
                 "Cherries",
@@ -124,6 +133,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Meats",
                 "Filet",
                 "c601",
                 "Chicken",
@@ -138,6 +148,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Fruits",
                 "Green",
                 "af14",
                 "Grapes",
@@ -152,6 +163,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Drinks & Beverages",
                 "Healthy choice",
                 "e7f5",
                 "Juice",
@@ -166,6 +178,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Vegetables",
                 "Romaine",
                 "e7f5",
                 "Lettuce",
@@ -180,6 +193,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Fruits",
                 "Sevilla",
                 "9de6",
                 "Oranges",
@@ -194,6 +208,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Vegetables",
                 "Mixed",
                 "e909",
                 "Paprica",
@@ -208,6 +223,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Frozen",
                 "Various",
                 "15b0",
                 "Pizza",
@@ -222,6 +238,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Vegetables",
                 "Ambassador",
                 "40ac",
                 "Potato",
@@ -236,6 +253,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Vegetables",
                 "Cherry Round",
                 "ed1c",
                 "Radish",
@@ -250,6 +268,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Fruits",
                 "Two juicy",
                 "87e4",
                 "Strawberries",
@@ -264,6 +283,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "Vegetables",
                 "Vine",
                 "108b",
                 "Tomatos",
@@ -274,10 +294,50 @@ export class TProductStoreMockService
                 "assets/img/tomato/tomatos_4.jpg"
             )
         );
+        this._setCategories ();
     }
     
     getArticles() : TProduct[]
     {
         return this.fArticles;
+    }
+    
+    getCategories() : string[]
+    {
+        let ret: string[];
+
+        ret = [];
+        this.fCategories.forEach
+        (
+            function callb (item: string)
+            {
+                ret.push (item);
+            }
+        );
+    
+        return ret;
+    }
+    
+    private _setCategories(): void
+    {
+        let n  : number;
+        let i  : number;
+        let p  : TProduct;
+        let has: boolean;
+    
+        this.fCategories = new Set ();
+        n   = this.fArticles.length;
+        if (n >= 1)
+        {
+            for (i = 0; i < n; i++)
+            {
+                p     = this.fArticles [i];
+                has   = this.fCategories.has (p.fCategory);
+                if (! has)
+                {
+                    this.fCategories.add (p.fCategory);
+                }
+            }
+        }
     }
 }

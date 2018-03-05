@@ -3,6 +3,7 @@
  */
 export class TProduct
 {
+    fCategory:      string;     // e.g. "Fruit"
     fDetailName:    string;     // e.g. "Bluegold"
     fID:            string;     // uid
     fProductType:   string;     // e.g. "Blueberries"
@@ -14,6 +15,7 @@ export class TProduct
 
     constructor
     (
+        category:      string,
         detailName:    string,
         id:            string,
         productType:   string,
@@ -24,6 +26,7 @@ export class TProduct
         urlPhoto:      string
     )
     {
+        this.fCategory       = category;
         this.fDetailName     = detailName;
         this.fID             = id;
         this.fProductType    = productType;

@@ -20,8 +20,8 @@
     <div id="root-c">
 	    <!-- FIXME: Product buttons inside block to be left aligned, and
 	                whole block of product buttons to be centered in flow panel. -->
-	    <div *ngFor="let article of store.getArticles()" style="padding: 10px;">
-	        <app-tproduct-details-panel [article] = "article"></app-tproduct-details-panel>
+	    <div *ngFor="let article of store.getArticles()">
+            <app-tproduct-details-panel [article] = "article"></app-tproduct-details-panel>
 	    </div>
     </div>
 </div>
