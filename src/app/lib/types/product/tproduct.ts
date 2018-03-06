@@ -1,9 +1,11 @@
+import { TCategory } from './tcategory';
+
 /**
  * A product record. Holds the data associated with one product type.
  */
 export class TProduct
 {
-    fCategory:      string;     // e.g. "Fruit"
+    fCategory:      TCategory;  // e.g. "0abe", "Fruit"
     fDetailName:    string;     // e.g. "Bluegold"
     fID:            string;     // uid
     fProductType:   string;     // e.g. "Blueberries"
@@ -15,18 +17,19 @@ export class TProduct
 
     constructor
     (
-        category:      string,
-        detailName:    string,
-        id:            string,
-        productType:   string,
-        price:         string,
-        priceUnit:     string,
-        originCountry: string,
-        urlPhotoThumb: string,
-        urlPhoto:      string
+        categoryID:         string,
+        categoryInformal:   string,
+        detailName:         string,
+        id:                 string,
+        productType:        string,
+        price:              string,
+        priceUnit:          string,
+        originCountry:      string,
+        urlPhotoThumb:      string,
+        urlPhoto:           string
     )
     {
-        this.fCategory       = category;
+        this.fCategory       = new TCategory (categoryID, categoryInformal);
         this.fDetailName     = detailName;
         this.fID             = id;
         this.fProductType    = productType;

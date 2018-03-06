@@ -1,11 +1,12 @@
 import { Injectable }                       from '@angular/core';
 import { TProduct }                         from '../../lib/types/product/tproduct';
+import { TCategory }                        from '../../lib/types/product/tcategory';
 
 @Injectable()
 export class TProductStoreMockService
 {
     private fArticles:      TProduct[] = [];
-    private fCategories:    Set<string>;
+    private fCategories:    Map<string, TCategory>;
 
     constructor()
     {
@@ -13,11 +14,12 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "01",
                 "Fruits",
                 "Golden delicious",
                 "8d79",
                 "Apples",
-                "1.69",
+                "1.58",
                 "kg",
                 "France",
                 "assets/img/apple/apple_1.jpg",
@@ -28,6 +30,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "02",
                 "Vegetables",
                 "Green queen",
                 "5ce1",
@@ -43,6 +46,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "03",
                 "Meats",
                 "Argentinian massive",
                 "4142",
@@ -58,6 +62,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "01",
                 "Fruits",
                 "Bluegold",
                 "c5a3",
@@ -73,6 +78,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "04",
                 "Bread",
                 "Toaster wonder",
                 "bb69",
@@ -88,6 +94,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "02",
                 "Vegetables",
                 "Long orange",
                 "d12c",
@@ -103,6 +110,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "05",
                 "Cheeses",
                 "Angletuierre",
                 "4bb5",
@@ -118,6 +126,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "01",
                 "Fruits",
                 "Tulares",
                 "8a80",
@@ -133,6 +142,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "03",
                 "Meats",
                 "Filet",
                 "c601",
@@ -148,6 +158,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "01",
                 "Fruits",
                 "Green",
                 "af14",
@@ -163,6 +174,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "06",
                 "Drinks & Beverages",
                 "Healthy choice",
                 "e7f5",
@@ -178,6 +190,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "02",
                 "Vegetables",
                 "Romaine",
                 "e7f5",
@@ -193,6 +206,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "01",
                 "Fruits",
                 "Sevilla",
                 "9de6",
@@ -208,6 +222,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "02",
                 "Vegetables",
                 "Mixed",
                 "e909",
@@ -223,6 +238,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "07",
                 "Frozen",
                 "Various",
                 "15b0",
@@ -238,6 +254,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "02",
                 "Vegetables",
                 "Ambassador",
                 "40ac",
@@ -253,6 +270,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "02",
                 "Vegetables",
                 "Cherry Round",
                 "ed1c",
@@ -268,6 +286,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "01",
                 "Fruits",
                 "Two juicy",
                 "87e4",
@@ -283,6 +302,7 @@ export class TProductStoreMockService
         (
             new TProduct
             (
+                "02",
                 "Vegetables",
                 "Vine",
                 "108b",
@@ -297,7 +317,7 @@ export class TProductStoreMockService
         this._setCategories ();
     }
     
-    getArticlesByCategory (category) : TProduct[]
+    getArticlesByCategory (categoryID) : TProduct[]
     {
         let n  : number;
         let i  : number;
@@ -311,13 +331,16 @@ export class TProductStoreMockService
             for (i = 0; i < n; i++)
             {
                 p = this.fArticles [i];
-                if (p.fCategory == category)
+                if (p.fCategory.fID == categoryID)
                 {
                     ret.push (p);
                 }
-                else if (category == "*")
+                else if (categoryID == "0")
                 {
-                    ret.push (p);
+                    if (Math.random() >= 0.5)
+                    {
+                        ret.push (p);
+                    }
                 }
             }
         }
@@ -330,16 +353,18 @@ export class TProductStoreMockService
         return this.fArticles;
     }
     
-    getCategories() : string[]
+    getCategories() : TCategory[]
     {
-        let ret: string[];
+        let pop: TCategory;
+        let ret: TCategory[];
 
-        ret = ['*'];
+        pop = new TCategory ("0", "Most popular");
+        ret = [pop];
         this.fCategories.forEach
         (
-            function callb (item: string)
+            function onItem (category: TCategory, id: string)
             {
-                ret.push (item);
+                ret.push (category);
             }
         );
     
@@ -353,17 +378,17 @@ export class TProductStoreMockService
         let p  : TProduct;
         let has: boolean;
     
-        this.fCategories = new Set ();
+        this.fCategories = new Map ();
         n   = this.fArticles.length;
         if (n >= 1)
         {
             for (i = 0; i < n; i++)
             {
                 p     = this.fArticles [i];
-                has   = this.fCategories.has (p.fCategory);
+                has   = this.fCategories.has (p.fCategory.fID);
                 if (! has)
                 {
-                    this.fCategories.add (p.fCategory);
+                    this.fCategories.set (p.fCategory.fID, p.fCategory);
                 }
             }
         }

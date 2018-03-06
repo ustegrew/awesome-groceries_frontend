@@ -21,7 +21,7 @@ export class TLandingComponent implements OnInit
 
     ngOnInit()
     {
-        this.fProducts = this.store.getArticlesByCategory ("*");
+        this.fProducts = this.store.getArticlesByCategory ("0");
     }
     
     onChangeCategory ($event): void
