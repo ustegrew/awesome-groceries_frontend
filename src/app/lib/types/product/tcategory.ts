@@ -1,5 +1,7 @@
 export class TCategory 
 {
+    static readonly    kIDMostPopular:   string = "99";
+    
     fID:                    string;
     fInformal:              string;
 

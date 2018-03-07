@@ -335,7 +335,7 @@ export class TProductStoreMockService
                 {
                     ret.push (p);
                 }
-                else if (categoryID == "0")
+                else if (categoryID == TCategory.kIDMostPopular)
                 {
                     if (Math.random() >= 0.5)
                     {
@@ -355,11 +355,9 @@ export class TProductStoreMockService
     
     getCategories() : TCategory[]
     {
-        let pop: TCategory;
         let ret: TCategory[];
 
-        pop = new TCategory ("0", "Most popular");
-        ret = [pop];
+        ret = [];
         this.fCategories.forEach
         (
             function onItem (category: TCategory, id: string)
@@ -367,12 +365,13 @@ export class TProductStoreMockService
                 ret.push (category);
             }
         );
-    
+        
         return ret;
     }
     
     private _setCategories(): void
     {
+        let pop: TCategory;
         let n  : number;
         let i  : number;
         let p  : TProduct;
@@ -380,6 +379,8 @@ export class TProductStoreMockService
     
         this.fCategories = new Map ();
         n   = this.fArticles.length;
+        pop = new TCategory (TCategory.kIDMostPopular, "Most popular");
+        this.fCategories.set(pop.fID, pop);
         if (n >= 1)
         {
             for (i = 0; i < n; i++)

@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter    } from '@angular/core';
 import { TProductStoreMockService                   } from '../../../services/product/tproduct-store-mock.service';
+import { TCategory }                                  from '../../../lib/types/product/tcategory';
 
 @Component({
   selector: 'app-tcategory-box',
@@ -17,6 +18,15 @@ export class TCategoryBoxComponent implements OnInit
 
     ngOnInit() 
     {
+    }
+    
+    getCategories() : TCategory[]
+    {
+        let ret: TCategory [];
+    
+        ret = this.store.getCategories ();
+        
+        return ret;
     }
     
     onChangeValue (choice: string) : void
