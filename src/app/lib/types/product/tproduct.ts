@@ -5,9 +5,10 @@ import { TCategory } from './tcategory';
  */
 export class TProduct
 {
-    fCategory:      TCategory;  // e.g. "0abe", "Fruit"
+    fCategory:      TCategory;  // e.g. "02", "Fruit"
     fDetailName:    string;     // e.g. "Bluegold"
     fID:            string;     // uid
+    fPopularity:    number;     // e.g. 0.98 (must be in range 0.00 ... 1.00)
     fProductType:   string;     // e.g. "Blueberries"
     fPrice:         string;     // money, money, money... must be funny...
     fPriceUnit:     string;     // e.g. "per lb"
@@ -21,6 +22,7 @@ export class TProduct
         categoryInformal:   string,
         detailName:         string,
         id:                 string,
+        popularity:         number,
         productType:        string,
         price:              string,
         priceUnit:          string,
@@ -32,6 +34,7 @@ export class TProduct
         this.fCategory       = new TCategory (categoryID, categoryInformal);
         this.fDetailName     = detailName;
         this.fID             = id;
+        this.fPopularity     = popularity;
         this.fProductType    = productType;
         this.fPrice          = price;
         this.fPriceUnit      = priceUnit;

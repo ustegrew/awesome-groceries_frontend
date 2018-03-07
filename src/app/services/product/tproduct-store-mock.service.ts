@@ -5,6 +5,9 @@ import { TCategory }                        from '../../lib/types/product/tcateg
 @Injectable()
 export class TProductStoreMockService
 {
+    static readonly         kIDCategoryMostPopular: string = "99";
+    static readonly         kPopularityThreshold  : number = 0.80;
+    
     private fArticles:      TProduct[] = [];
     private fCategories:    Map<string, TCategory>;
 
@@ -18,6 +21,7 @@ export class TProductStoreMockService
                 "Fruits",
                 "Golden delicious",
                 "8d79",
+                0.35,
                 "Apples",
                 "1.58",
                 "kg",
@@ -34,6 +38,7 @@ export class TProductStoreMockService
                 "Vegetables",
                 "Green queen",
                 "5ce1",
+                0.48,
                 "Avocadoes",
                 "2.25",
                 "lb",
@@ -50,6 +55,7 @@ export class TProductStoreMockService
                 "Meats",
                 "Argentinian massive",
                 "4142",
+                0.76,
                 "Beef",
                 "3.21",
                 "250g",
@@ -66,6 +72,7 @@ export class TProductStoreMockService
                 "Fruits",
                 "Bluegold",
                 "c5a3",
+                0.38,
                 "Blueberries",
                 "2.99",
                 "250g",
@@ -82,6 +89,7 @@ export class TProductStoreMockService
                 "Bread",
                 "Toaster wonder",
                 "bb69",
+                0.89,
                 "Bread",
                 "1.28",
                 "loaf",
@@ -98,6 +106,7 @@ export class TProductStoreMockService
                 "Vegetables",
                 "Long orange",
                 "d12c",
+                0.62,
                 "Carrots",
                 "0.69",
                 "500g",
@@ -114,6 +123,7 @@ export class TProductStoreMockService
                 "Cheeses",
                 "Angletuierre",
                 "4bb5",
+                0.98,
                 "Cheese",
                 "2.19",
                 "Pack",
@@ -130,6 +140,7 @@ export class TProductStoreMockService
                 "Fruits",
                 "Tulares",
                 "8a80",
+                0.73,
                 "Cherries",
                 "3.29",
                 "500g",
@@ -146,6 +157,7 @@ export class TProductStoreMockService
                 "Meats",
                 "Filet",
                 "c601",
+                0.83,
                 "Chicken",
                 "3.29",
                 "750g",
@@ -162,6 +174,7 @@ export class TProductStoreMockService
                 "Fruits",
                 "Green",
                 "af14",
+                0.47,
                 "Grapes",
                 "1.59",
                 "250g",
@@ -178,6 +191,7 @@ export class TProductStoreMockService
                 "Drinks & Beverages",
                 "Healthy choice",
                 "e7f5",
+                0.68,
                 "Juice",
                 "1.59",
                 "Litre",
@@ -194,6 +208,7 @@ export class TProductStoreMockService
                 "Vegetables",
                 "Romaine",
                 "e7f5",
+                0.59,
                 "Lettuce",
                 "0.89",
                 "Pc",
@@ -210,6 +225,7 @@ export class TProductStoreMockService
                 "Fruits",
                 "Sevilla",
                 "9de6",
+                0.63,
                 "Oranges",
                 "1.29",
                 "kg",
@@ -226,6 +242,7 @@ export class TProductStoreMockService
                 "Vegetables",
                 "Mixed",
                 "e909",
+                0.78,
                 "Paprica",
                 "1.59",
                 "kg",
@@ -242,6 +259,7 @@ export class TProductStoreMockService
                 "Frozen",
                 "Various",
                 "15b0",
+                0.92,
                 "Pizza",
                 "1.00",
                 "Pack",
@@ -258,6 +276,7 @@ export class TProductStoreMockService
                 "Vegetables",
                 "Ambassador",
                 "40ac",
+                0.91,
                 "Potato",
                 "2.50",
                 "kg",
@@ -274,6 +293,7 @@ export class TProductStoreMockService
                 "Vegetables",
                 "Cherry Round",
                 "ed1c",
+                0.76,
                 "Radish",
                 "1.50",
                 "Bunch",
@@ -290,6 +310,7 @@ export class TProductStoreMockService
                 "Fruits",
                 "Two juicy",
                 "87e4",
+                0.83,
                 "Strawberries",
                 "2.49",
                 "kg",
@@ -306,6 +327,7 @@ export class TProductStoreMockService
                 "Vegetables",
                 "Vine",
                 "108b",
+                0.39,
                 "Tomatos",
                 "1.29",
                 "Pack",
@@ -335,9 +357,9 @@ export class TProductStoreMockService
                 {
                     ret.push (p);
                 }
-                else if (categoryID == TCategory.kIDMostPopular)
+                else if (categoryID == TProductStoreMockService.kIDCategoryMostPopular)
                 {
-                    if (Math.random() >= 0.5)
+                    if (p.fPopularity >= TProductStoreMockService.kPopularityThreshold)
                     {
                         ret.push (p);
                     }
@@ -371,16 +393,17 @@ export class TProductStoreMockService
     
     private _setCategories(): void
     {
-        let pop: TCategory;
+        let meta: TCategory;
         let n  : number;
         let i  : number;
         let p  : TProduct;
         let has: boolean;
     
         this.fCategories = new Map ();
-        n   = this.fArticles.length;
-        pop = new TCategory (TCategory.kIDMostPopular, "Most popular");
-        this.fCategories.set(pop.fID, pop);
+        meta    = new TCategory (TProductStoreMockService.kIDCategoryMostPopular, "Most popular");
+        this.fCategories.set(meta.fID, meta);
+
+        n       = this.fArticles.length;
         if (n >= 1)
         {
             for (i = 0; i < n; i++)
