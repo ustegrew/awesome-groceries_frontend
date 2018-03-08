@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent }                     from './app.component';
 import { AppRouterModule }                  from './services/router/app-router.module';
+import { TControllerService }               from './services/controller/tcontroller.service';
 import { TProductStoreMockService }         from './services/product/tproduct-store-mock.service';
 import { TLandingComponent }                from './components/pages/tlanding/tlanding.component';
 import { TDetailsComponent }                from './components/pages/tdetails/tdetails.component';
@@ -41,6 +42,7 @@ import { TFourOhFourComponent }             from './components/pages/tfour-oh-fo
   ],
   providers: 
   [
+      TControllerService,
       TProductStoreMockService
   ],
   bootstrap: [AppComponent],

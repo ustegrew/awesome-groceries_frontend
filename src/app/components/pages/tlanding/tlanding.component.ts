@@ -1,5 +1,7 @@
 import { Component, OnInit                } from '@angular/core';
-import { TProductStoreMockService         } from '../../../services/product/tproduct-store-mock.service';
+import { Subscription                     } from 'rxjs/Subscription';
+import { TControllerService               } from '../../../services/controller/tcontroller.service'; 
+import { TSearch                          } from '../../../lib/types/search/tsearch';
 import { TProduct                         } from '../../../lib/types/product/tproduct';
 import { TLogoComponent                   } from '../../widgets/tlogo/tlogo.component';
 import { TGoCartButtonComponent           } from '../../widgets/tgo-cart-button/tgo-cart-button.component';
@@ -13,20 +15,26 @@ import { TSearchComponent                 } from '../../widgets/tsearch/tsearch.
 })
 export class TLandingComponent implements OnInit
 {
-    private fProducts: TProduct[];
+    private fProducts           : TProduct[];
+    private fReceiverProducts   : Subscription;
     
-    constructor (public store: TProductStoreMockService)
+    constructor (private fController: TControllerService)
     {
+        this.fReceiverProducts = this.fController.subscribeToPushProducts().subscribe 
+        (
+            function (list: TProduct[])
+            {
+                this.fProducts = list;
+            }
+        );
     }
 
     ngOnInit()
     {
-        this.fProducts = this.store.getArticlesByCategory (TProductStoreMockService.kIDCategoryMostPopular);
-    }
+        let query: TSearch;
     
-    onChangeCategory ($event): void
-    {
-        this.fProducts = this.store.getArticlesByCategory ($event);
+        query = new TSearch ("", TControllerService.kIDCategoryMostPopular, false);
+        this.fController.queryProducts (query);
     }
     
     getObserved (): TProduct[]

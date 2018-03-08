@@ -1,17 +1,23 @@
 import { Injectable }                       from '@angular/core';
+import { TControllerService }               from '../controller/tcontroller.service';
 import { TProduct }                         from '../../lib/types/product/tproduct';
 import { TCategory }                        from '../../lib/types/product/tcategory';
+import { TSearch }                          from '../../lib/types/search/tsearch';
 
+/**
+ * Product store. Accessor to the backend. This is the mockup class to get something.
+ */
 @Injectable()
 export class TProductStoreMockService
 {
-    static readonly         kIDCategoryMostPopular: string = "99";
+    static readonly         kIDCategoryMostPopular: string = "98";
+    static readonly         kIDCategoryAll        : string = "99";
     static readonly         kPopularityThreshold  : number = 0.80;
     
     private fArticles:      TProduct[] = [];
     private fCategories:    Map<string, TCategory>;
 
-    constructor()
+    constructor(private fController: TControllerService)
     {
         this.fArticles.push
         (
@@ -338,60 +344,83 @@ export class TProductStoreMockService
         );
         this._setCategories ();
     }
-    
-    getArticlesByCategory (categoryID) : TProduct[]
-    {
-        let n  : number;
-        let i  : number;
-        let p  : TProduct;
-        let ret: TProduct[];
 
-        ret = [];
+    /**
+     * Executes a category query. Result is pushed back to the controller. We don't
+     * use a classic function call with return value, but push the result back. This
+     * makes the category query ready for asynchronous handling, e.g. when retrieving 
+     * data via HTTP request from a backend.
+     */
+    queryCategories () : void
+    {
+        let list: TCategory[];
+
+        list = [];
+        this.fCategories.forEach
+        (
+            function onItem (category: TCategory, id: string)
+            {
+                list.push (category);
+            }
+        );
+        
+        this.fController.pushCategories (list);
+    }
+    
+    /**
+     * Executes a product query. Result is pushed back to the controller. We don't
+     * use a classic function call with return value, but push the result back. This
+     * makes the product query ready for asynchronous handling, e.g. when retrieving 
+     * data via HTTP request from a backend.
+     */
+    queryProducts (query: TSearch) : void
+    {
+        let n   : number;
+        let i   : number;
+        let p   : TProduct;
+        let list: TProduct[];
+    
+        list = [];
         n   = this.fArticles.length;
         if (n >= 1)
         {
             for (i = 0; i < n; i++)
             {
                 p = this.fArticles [i];
-                if (p.fCategory.fID == categoryID)
-                {
-                    ret.push (p);
+                
+                if (query.fCategory == TProductStoreMockService.kIDCategoryAll)
+                {   /* Requested: All items. */
+                    list.push (p);
                 }
-                else if (categoryID == TProductStoreMockService.kIDCategoryMostPopular)
-                {
+                else if (query.fCategory == TProductStoreMockService.kIDCategoryMostPopular)
+                {   /* Requested: Most popular products. */
                     if (p.fPopularity >= TProductStoreMockService.kPopularityThreshold)
                     {
-                        ret.push (p);
+                        list.push (p);
+                    }
+                }
+                else if (query.fSearchTerm == p.fProductType)
+                {   /* Requested: Products whose type matches search term */
+                    if (query.fIsRestrictToCategory)
+                    {   
+                        if (query.fCategory == p.fCategory.fID)
+                        {
+                            list.push (p);
+                        }
+                    }
+                    else
+                    {
+                        list.push (p);
                     }
                 }
             }
         }
-        
-        return ret;
     }
     
-    getArticles () : TProduct[]
-    {
-        return this.fArticles;
-    }
-    
-    getCategories() : TCategory[]
-    {
-        let ret: TCategory[];
-
-        ret = [];
-        this.fCategories.forEach
-        (
-            function onItem (category: TCategory, id: string)
-            {
-                ret.push (category);
-            }
-        );
-        
-        return ret;
-    }
-    
-    private _setCategories(): void
+    /**
+     * Extracts list of categories from the products.
+     */
+    private _setCategories (): void
     {
         let meta: TCategory;
         let n  : number;
