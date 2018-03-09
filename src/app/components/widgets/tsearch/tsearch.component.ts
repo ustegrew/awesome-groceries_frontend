@@ -19,6 +19,6 @@ export class TSearchComponent implements OnInit
   
     onChangeValue (doRestrict: boolean) : void
     {
-        this.fStore.searchUpdateConstraints (doRestrict)
+//        this.fStore.searchUpdateConstraints (doRestrict)
     }
 }

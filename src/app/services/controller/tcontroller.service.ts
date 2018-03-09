@@ -1,7 +1,8 @@
-import { Injectable, forwardRef, Inject             } from '@angular/core';
+import { Injectable, Inject, forwardRef             } from '@angular/core';
 import { Observable                                 } from 'rxjs';
 import { Subject                                    } from 'rxjs/Subject';
-import { TProductStoreMockService                   } from '../product/tproduct-store-mock.service';
+import { TConnectorControllerStoreService           } from '../_inter/tconnector-controller-store.service'; /* [1] */
+import { TConfig                                    } from '../../tconfig';
 import { TCategory                                  } from '../../lib/types/product/tcategory';
 import { TProduct                                   } from '../../lib/types/product/tproduct';
 import { TSearch                                    } from '../../lib/types/search/tsearch';
@@ -12,16 +13,17 @@ import { TSearch                                    } from '../../lib/types/sear
 @Injectable()
 export class TControllerService 
 {
-    static readonly         kIDCategoryMostPopular: string = TProductStoreMockService.kIDCategoryMostPopular;
-    static readonly         kIDCategoryAll        : string = TProductStoreMockService.kIDCategoryAll;
+    static readonly         kIDCategoryMostPopular: string = TConfig.kIDCategoryMostPopular;
+    static readonly         kIDCategoryAll        : string = TConfig.kIDCategoryAll;
 
     private fPushCategories             = null;
     private fPushProducts               = null;
     
-    constructor (@Inject(()=>TProductStoreMockService) private fStore: TProductStoreMockService) /* [1] */
+    constructor (private fStore: TConnectorControllerStoreService) /* [1] */
     {
         this.fPushCategories = new Subject<TCategory[]> ();
         this.fPushProducts   = new Subject<TProduct[]> ();
+        this.fStore.setController (this);
     }
     
     /**
@@ -52,8 +54,10 @@ export class TControllerService
      * 
      * @param   query               Query object defining the search.
      */
-    queryProducts (query: TSearch) : void
+    queryProducts (searchTerm: string, category: string, isRestrictToCategory: boolean) : void
     {
+        let query: TSearch = new TSearch (searchTerm, category, isRestrictToCategory);
+        
         this.fStore.queryProducts (query);
     }
     
@@ -102,6 +106,12 @@ export class TControllerService
     }
 }
 
+
 /*
-[1]: Forward ref to break circular dependency between TControllerService and TProductStoreMockService
+[1]: Connector service - breaks circular dependency between TController service and 
+     TProductStore service. These depend on each other, but if we have them call each
+     other's methods directly we get a 'circular dependency' warning on the web console.
+     Plus, the web app might not work. Angular offers forward references; I tried those,
+     but still got circular dependency warnings. 
 */
+

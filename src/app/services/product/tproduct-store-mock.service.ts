@@ -1,23 +1,24 @@
-import { Injectable }                       from '@angular/core';
-import { TControllerService }               from '../controller/tcontroller.service';
-import { TProduct }                         from '../../lib/types/product/tproduct';
-import { TCategory }                        from '../../lib/types/product/tcategory';
-import { TSearch }                          from '../../lib/types/search/tsearch';
+import { Injectable, Inject, forwardRef     } from '@angular/core';
+import { TConnectorControllerStoreService   } from '../_inter/tconnector-controller-store.service'; /* [1] */
+import { TConfig                            } from '../../tconfig';
+import { TProduct                           } from '../../lib/types/product/tproduct';
+import { TCategory                          } from '../../lib/types/product/tcategory';
+import { TSearch                            } from '../../lib/types/search/tsearch';
 
 /**
- * Product store. Accessor to the backend. This is the mockup class to get something.
+ * Product store. Accessor to the backend. This is the mockup class.
  */
 @Injectable()
 export class TProductStoreMockService
 {
-    static readonly         kIDCategoryMostPopular: string = "98";
-    static readonly         kIDCategoryAll        : string = "99";
+    static readonly         kIDCategoryMostPopular: string = TConfig.kIDCategoryMostPopular;
+    static readonly         kIDCategoryAll        : string = TConfig.kIDCategoryAll;
     static readonly         kPopularityThreshold  : number = 0.80;
     
     private fArticles:      TProduct[] = [];
     private fCategories:    Map<string, TCategory>;
 
-    constructor(private fController: TControllerService)
+    constructor(private fController: TConnectorControllerStoreService)
     {
         this.fArticles.push
         (
@@ -343,6 +344,8 @@ export class TProductStoreMockService
             )
         );
         this._setCategories ();
+
+        this.fController.setStore(this); /* [1] */
     }
 
     /**
@@ -379,7 +382,7 @@ export class TProductStoreMockService
         let i   : number;
         let p   : TProduct;
         let list: TProduct[];
-    
+
         list = [];
         n   = this.fArticles.length;
         if (n >= 1)
@@ -415,6 +418,8 @@ export class TProductStoreMockService
                 }
             }
         }
+        
+        this.fController.pushProducts (list);
     }
     
     /**
@@ -447,3 +452,12 @@ export class TProductStoreMockService
         }
     }
 }
+
+/*
+[1]: Connector service - breaks circular dependency between TController service and 
+     TProductStore service. These depend on each other, but if we have them call each
+     other's methods directly we get a 'circular dependency' warning on the web console.
+     Plus, the web app might not work. Angular offers forward references; I tried those,
+     but still got circular dependency warnings. 
+*/
+

@@ -20,21 +20,20 @@ export class TLandingComponent implements OnInit
     
     constructor (private fController: TControllerService)
     {
+        let instance: TLandingComponent = this;
+        
         this.fReceiverProducts = this.fController.subscribeToPushProducts().subscribe 
         (
             function (list: TProduct[])
             {
-                this.fProducts = list;
+                instance.fProducts = list;
             }
         );
     }
 
     ngOnInit()
     {
-        let query: TSearch;
-    
-        query = new TSearch ("", TControllerService.kIDCategoryMostPopular, false);
-        this.fController.queryProducts (query);
+        this.fController.queryProducts ("", TControllerService.kIDCategoryMostPopular, false);
     }
     
     getObserved (): TProduct[]
