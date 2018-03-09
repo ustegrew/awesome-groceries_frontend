@@ -382,7 +382,7 @@ export class TProductStoreMockService
         let i   : number;
         let p   : TProduct;
         let list: TProduct[];
-
+// TODO Audit this heuristics
         list = [];
         n   = this.fArticles.length;
         if (n >= 1)
@@ -401,6 +401,10 @@ export class TProductStoreMockService
                     {
                         list.push (p);
                     }
+                }
+                else if (query.fCategory == p.fCategory.fID  &&  query.fSearchTerm == "")
+                {
+                    list.push (p);
                 }
                 else if (query.fSearchTerm == p.fProductType)
                 {   /* Requested: Products whose type matches search term */
