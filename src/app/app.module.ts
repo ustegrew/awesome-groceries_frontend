@@ -1,6 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
+import { BrowserModule                          } from '@angular/platform-browser';
+import { NgModule                               } from '@angular/core';
+import { FormsModule, ReactiveFormsModule       } from '@angular/forms';
 
 import { AppComponent                           } from './app.component';
 import { TConnectorControllerStoreService       } from './services/_inter/tconnector-controller-store.service';
@@ -39,7 +39,9 @@ import { TFourOhFourComponent                   } from './components/pages/tfour
   ],
   imports: [
     BrowserModule,
-    AppRouterModule
+    AppRouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: 
   [

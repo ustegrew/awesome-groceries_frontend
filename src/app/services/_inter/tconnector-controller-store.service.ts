@@ -42,7 +42,14 @@ export class TConnectorControllerStoreService
      */
     queryCategories () : void
     {
-        this.fStore.queryCategories ();
+        if (this.fStore != null)
+        {
+            this.fStore.queryCategories ();
+        }
+        else
+        {
+            console.log ("Store not yet active. Query skipped");
+        }
     }
     
     /**
@@ -59,7 +66,14 @@ export class TConnectorControllerStoreService
      */
     queryProducts (query: TSearch) : void
     {
-        this.fStore.queryProducts (query);
+        if (this.fStore != null)
+        {
+            this.fStore.queryProducts (query);
+        }
+        else
+        {
+            console.log ("Store not yet active. Query skipped");
+        }
     }
     
     /* Accessors -> Store -> Controller */

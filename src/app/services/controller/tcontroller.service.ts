@@ -2,6 +2,7 @@ import { Injectable, Inject, forwardRef             } from '@angular/core';
 import { Observable                                 } from 'rxjs';
 import { Subject                                    } from 'rxjs/Subject';
 import { TConnectorControllerStoreService           } from '../_inter/tconnector-controller-store.service'; /* [1] */
+import { TProductStoreMockService                   } from '../product/tproduct-store-mock.service';        /* [2] */
 import { TConfig                                    } from '../../tconfig';
 import { TCategory                                  } from '../../lib/types/product/tcategory';
 import { TProduct                                   } from '../../lib/types/product/tproduct';
@@ -16,11 +17,13 @@ export class TControllerService
     static readonly         kIDCategoryMostPopular: string = TConfig.kIDCategoryMostPopular;
     static readonly         kIDCategoryAll        : string = TConfig.kIDCategoryAll;
 
-    private fPushCategories             = null;
-    private fPushProducts               = null;
+    private fCategoryPrev   : string;
+    private fPushCategories : Subject<TCategory[]>  = null;
+    private fPushProducts   : Subject<TProduct[]>   = null;
     
-    constructor (private fStore: TConnectorControllerStoreService) /* [1] */
+    constructor (private fStore: TConnectorControllerStoreService, private dummy: TProductStoreMockService) /* [1] [2] */
     {
+        this.fCategoryPrev   = "";
         this.fPushCategories = new Subject<TCategory[]> ();
         this.fPushProducts   = new Subject<TProduct[]> ();
         this.fStore.setController (this);
@@ -56,7 +59,13 @@ export class TControllerService
      */
     queryProducts (searchTerm: string, category: string, isRestrictToCategory: boolean) : void
     {
-        let query: TSearch = new TSearch (searchTerm, category, isRestrictToCategory);
+        let query       : TSearch;
+    
+        if (category != null)
+        {
+            this.fCategoryPrev = category;
+        }
+        query = new TSearch (searchTerm, this.fCategoryPrev, isRestrictToCategory);
         
         this.fStore.queryProducts (query);
     }
@@ -113,5 +122,11 @@ export class TControllerService
      other's methods directly we get a 'circular dependency' warning on the web console.
      Plus, the web app might not work. Angular offers forward references; I tried those,
      but still got circular dependency warnings. 
+     
+[2]: Bad solution, but it works: We have to create a dummy reference to the product store
+     otherwise the store service constructor won't run. We won't use the dummy reference
+     though; instead we use lazy initialization via the connector service. It's a really 
+     crummy hack, but at the moment I don't know how to otherwise instantiate the service 
+     singleton than to force inject it somewhere in the app. 
 */
 

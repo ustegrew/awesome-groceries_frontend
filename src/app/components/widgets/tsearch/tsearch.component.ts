@@ -1,5 +1,8 @@
 import { Component, OnInit                      } from '@angular/core';
-import { TProductStoreMockService               } from '../../../services/product/tproduct-store-mock.service';
+import { FormControl, ReactiveFormsModule       } from '@angular/forms';
+import 'rxjs/add/operator/debounceTime';
+import { TControllerService                     } from '../../../services/controller/tcontroller.service';
+import { TSearch                                } from '../../../lib/types/search/tsearch';
 
 @Component({
   selector: 'app-tsearch',
@@ -8,17 +11,38 @@ import { TProductStoreMockService               } from '../../../services/produc
 })
 export class TSearchComponent implements OnInit 
 {
-    constructor (private fStore: TProductStoreMockService)
+    fTxtTerm:           FormControl;
+    fSearchRestrict:    boolean;
+    fSearchTerm:        string;
+    
+    constructor (private fController: TControllerService)
     {
+        let instance: TSearchComponent = this;
         
+        this.fTxtTerm = new FormControl ();
+        this.fTxtTerm.valueChanges
+            .debounceTime (1000)
+            .subscribe
+            (
+                function (value)
+                {
+                    instance.fSearchTerm = value;
+                    instance.onChange ()
+                }
+            );
     }
 
     ngOnInit() 
     {
     }
-  
-    onChangeValue (doRestrict: boolean) : void
+    
+    onChange (): void
     {
-//        this.fStore.searchUpdateConstraints (doRestrict)
+        this.fController.queryProducts(this.fSearchTerm, null, this.fSearchRestrict);
+    }
+  
+    onChangeScope (doRestrict: boolean) : void
+    {
+        this.fSearchRestrict = doRestrict;
     }
 }

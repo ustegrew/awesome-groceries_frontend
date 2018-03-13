@@ -378,10 +378,13 @@ export class TProductStoreMockService
      */
     queryProducts (query: TSearch) : void
     {
-        let n   : number;
-        let i   : number;
-        let p   : TProduct;
-        let list: TProduct[];
+        let n        : number;
+        let i        : number;
+        let p        : TProduct;
+        let rx       : RegExp;
+        let doesMatch: boolean;
+        let list     : TProduct[];
+
 // TODO Audit this heuristics
         list = [];
         n   = this.fArticles.length;
@@ -406,18 +409,23 @@ export class TProductStoreMockService
                 {
                     list.push (p);
                 }
-                else if (query.fSearchTerm == p.fProductType)
-                {   /* Requested: Products whose type matches search term */
-                    if (query.fIsRestrictToCategory)
-                    {   
-                        if (query.fCategory == p.fCategory.fID)
+                else
+                {
+                    rx          = new RegExp (query.fSearchTerm, "i");
+                    doesMatch   = rx.test (p.fProductType);
+                    if (doesMatch)
+                    {   /* Requested: Products whose type matches search term */
+                        if (query.fIsRestrictToCategory)
+                        {   
+                            if (query.fCategory == p.fCategory.fID)
+                            {
+                                list.push (p);
+                            }
+                        }
+                        else
                         {
                             list.push (p);
                         }
-                    }
-                    else
-                    {
-                        list.push (p);
                     }
                 }
             }
