@@ -1,6 +1,7 @@
 import { BrowserModule                          } from '@angular/platform-browser';
 import { NgModule                               } from '@angular/core';
 import { FormsModule, ReactiveFormsModule       } from '@angular/forms';
+import {MatDividerModule                        } from '@angular/material';
 
 import { AppComponent                           } from './app.component';
 import { TConnectorControllerStoreService       } from './services/_inter/tconnector-controller-store.service';
@@ -41,7 +42,8 @@ import { TFourOhFourComponent                   } from './components/pages/tfour
     BrowserModule,
     AppRouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDividerModule
   ],
   providers: 
   [

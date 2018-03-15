@@ -7,7 +7,7 @@
 
 #root-a
 {
-    flex:               0 0 40px; 
+    flex:               0 0 50px; 
     display:            flex; 
     flex-direction:     row; 
     justify-content:    space-between;
@@ -15,10 +15,16 @@
 
 #root-b
 {
-    flex:               0 0 22px; 
+    flex:               0 0 30px; 
     display:            flex; 
     flex-direction:     row; 
     justify-content:    space-between;
+}
+
+#root-b > div
+{
+    margin-top:         5px;
+    margin-bottom:      5px;
 }
 
 #root-c

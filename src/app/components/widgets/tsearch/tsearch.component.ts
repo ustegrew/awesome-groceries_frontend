@@ -21,7 +21,7 @@ export class TSearchComponent implements OnInit
         
         this.fTxtTerm = new FormControl ();
         this.fTxtTerm.valueChanges
-            .debounceTime (1000)
+            .debounceTime (300)
             .subscribe
             (
                 function (value)

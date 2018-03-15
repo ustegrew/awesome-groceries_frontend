@@ -1,0 +1,21 @@
+<div id="root">
+	<div id="root-title">
+	    <span>{{fData.fProductType}}</span>
+	    <span><img src="assets/misc/close-button-icon.png"/></span>
+	</div>
+	<div id="root-main">
+	    <div id="root-main-product">
+	        <h1 id="root-main-product-heading">{{data.fDetailName}}</h1>
+	        <span id="root-main-product-label-a">Origin</span>
+	        <span id="root-main-product-field-a">{{data.fOriginCountry}}</span>
+	        <span id="root-main-product-label-b">Price per {{data.fPriceUnit}}</span>
+	        <span id="root-main-product-field-b">{{data.fPrice}}</span>
+	    </div>
+	    <div id="root-main-photo">
+	        <img src="{{data.fURLPhoto}}"/>
+	    </div>
+	</div>
+	<div id="root-footer>
+		<app-tadd-to-cart-button [articleID]="data.fID"></app-tadd-to-cart-button>
+	</div>
+</div>

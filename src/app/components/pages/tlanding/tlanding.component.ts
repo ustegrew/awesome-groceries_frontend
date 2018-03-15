@@ -1,5 +1,7 @@
 import { Component, OnInit                } from '@angular/core';
 import { Subscription                     } from 'rxjs/Subscription';
+import { MatDividerModule                 } from '@angular/material';
+
 import { TControllerService               } from '../../../services/controller/tcontroller.service'; 
 import { TSearch                          } from '../../../lib/types/search/tsearch';
 import { TProduct                         } from '../../../lib/types/product/tproduct';
