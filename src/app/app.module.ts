@@ -1,13 +1,12 @@
 import { BrowserModule                          } from '@angular/platform-browser';
 import { NgModule                               } from '@angular/core';
 import { FormsModule, ReactiveFormsModule       } from '@angular/forms';
-import {MatDividerModule                        } from '@angular/material';
-
+import { MatDividerModule                       } from '@angular/material';
 import { AppComponent                           } from './app.component';
-import { TConnectorControllerStoreService       } from './services/_inter/tconnector-controller-store.service';
-import { TControllerService                     } from './services/controller/tcontroller.service';
-import { TProductStoreMockService               } from './services/product/tproduct-store-mock.service';
 import { AppRouterModule                        } from './services/router/app-router.module';
+import { TControllerService                     } from './services/controller/tcontroller.service';
+import { TProductStoreService                   } from './services/product/store/tproduct-store.service';
+import { TDBService                             } from './services/db-mock/tdb.service';
 import { TLandingComponent                      } from './components/pages/tlanding/tlanding.component';
 import { TDetailsComponent                      } from './components/pages/tdetails/tdetails.component';
 import { TCartComponent                         } from './components/pages/tcart/tcart.component';
@@ -20,7 +19,6 @@ import { TViewDetailsButtonComponent            } from './components/widgets/tvi
 import { TAddToCartButtonComponent              } from './components/widgets/tadd-to-cart-button/tadd-to-cart-button.component';
 import { TProductDetailsPanelComponent          } from './components/widgets/tproduct-details-panel/tproduct-details-panel.component';
 import { TFourOhFourComponent                   } from './components/pages/tfour-oh-four/tfour-oh-four.component';
-
 
 @NgModule({
   declarations: [
@@ -47,9 +45,9 @@ import { TFourOhFourComponent                   } from './components/pages/tfour
   ],
   providers: 
   [
-      TConnectorControllerStoreService,
       TControllerService,
-      TProductStoreMockService
+      TProductStoreService,
+      TDBService
   ],
   bootstrap: [AppComponent],
   exports: []

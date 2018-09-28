@@ -1,12 +1,11 @@
 import { Injectable, Inject, forwardRef             } from '@angular/core';
 import { Observable                                 } from 'rxjs';
 import { Subject                                    } from 'rxjs/Subject';
-import { TConnectorControllerStoreService           } from '../_inter/tconnector-controller-store.service'; /* [1] */
-import { TProductStoreMockService                   } from '../product/tproduct-store-mock.service';        /* [2] */
 import { TConfig                                    } from '../../tconfig';
 import { TCategory                                  } from '../../lib/types/product/tcategory';
 import { TProduct                                   } from '../../lib/types/product/tproduct';
-import { TSearch                                    } from '../../lib/types/search/tsearch';
+import { TQuery                                     } from '../../lib/types/search/tquery';
+import { TProductStoreService                       } from "../product/store/tproduct-store.service";
 
 /**
  * Central controller service. Coordinates all application activities. 
@@ -17,16 +16,17 @@ export class TControllerService
     static readonly         kIDCategoryMostPopular: string = TConfig.kIDCategoryMostPopular;
     static readonly         kIDCategoryAll        : string = TConfig.kIDCategoryAll;
 
-    private fCategoryPrev   : string;
-    private fPushCategories : Subject<TCategory[]>  = null;
-    private fPushProducts   : Subject<TProduct[]>   = null;
+    private fPushCategories     : Subject<TCategory[]>  = null;
+    private fPushProducts       : Subject<TProduct[]>   = null;
+    private fQueryCategory      : string;
+    private fQuerySearchTerm    : string;
     
-    constructor (private fStore: TConnectorControllerStoreService, private dummy: TProductStoreMockService) /* [1] [2] */
+    constructor (private fStore: TProductStoreService) /* [1] [2] */
     {
-        this.fCategoryPrev   = "";
-        this.fPushCategories = new Subject<TCategory[]> ();
-        this.fPushProducts   = new Subject<TProduct[]> ();
-        this.fStore.setController (this);
+        this.fPushCategories    = new Subject<TCategory[]> ();
+        this.fPushProducts      = new Subject<TProduct[]> ();
+        this.fQueryCategory     = "";
+        this.fQuerySearchTerm   = "";
     }
     
     /**
@@ -42,7 +42,13 @@ export class TControllerService
      */
     queryCategories () : void
     {
-        this.fStore.queryCategories ();
+        let receptacle : Observable<TCategory[]>;
+        
+        receptacle = this.fStore.queryCategories ();
+        receptacle.subscribe
+        (
+            list => this.fPushCategories.next (list)
+        );
     }
     
     /**
@@ -57,39 +63,28 @@ export class TControllerService
      * 
      * @param   query               Query object defining the search.
      */
-    queryProducts (searchTerm: string, category: string, isRestrictToCategory: boolean) : void
+    queryProducts () : void
     {
-        let query       : TSearch;
+        let query       : TQuery;
+        let receptacle  : Observable<TProduct[]>;
     
-        if (category != null)
-        {
-            this.fCategoryPrev = category;
-        }
-        query = new TSearch (searchTerm, this.fCategoryPrev, isRestrictToCategory);
-        
-        this.fStore.queryProducts (query);
+        query       = new TQuery (this.fQuerySearchTerm, this.fQueryCategory);
+        receptacle  = this.fStore.queryProducts (query);
+            
+        receptacle.subscribe
+        (
+            list => this.fPushProducts.next (list)
+        );
     }
     
-    /**
-     * Callback, used from the product store to respond to a category list query.
-     * Will broadcast the list to all subscribers.
-     * 
-     * @param list      The list to broadcast
-     */
-    pushCategories (list: TCategory [])
+    setQueryCategory (category : string)
     {
-        this.fPushCategories.next (list);
+        this.fQueryCategory = category;
     }
     
-    /**
-     * Callback, used from the product store to respond to a product list query.
-     * Will broadcast the list to all subscribers.
-     * 
-     * @param list      The list to broadcast
-     */
-    pushProducts (list: TProduct [])
+    setQuerySearchTerm (term : string)
     {
-        this.fPushProducts.next (list);
+        this.fQuerySearchTerm = term;
     }
     
     /**
@@ -98,7 +93,7 @@ export class TControllerService
      * 
      * @return      Observable subscription
      */
-    subscribeToPushCategories (): Observable<TCategory []>
+    subscribeToPushCategories () : Observable<TCategory []>
     {
         return this.fPushCategories.asObservable ();
     }
@@ -114,19 +109,4 @@ export class TControllerService
         return this.fPushProducts.asObservable ();
     }
 }
-
-
-/*
-[1]: Connector service - breaks circular dependency between TController service and 
-     TProductStore service. These depend on each other, but if we have them call each
-     other's methods directly we get a 'circular dependency' warning on the web console.
-     Plus, the web app might not work. Angular offers forward references; I tried those,
-     but still got circular dependency warnings. 
-     
-[2]: Bad solution, but it works: We have to create a dummy reference to the product store
-     otherwise the store service constructor won't run. We won't use the dummy reference
-     though; instead we use lazy initialization via the connector service. It's a really 
-     crummy hack, but at the moment I don't know how to otherwise instantiate the service 
-     singleton than to force inject it somewhere in the app. 
-*/
 

@@ -3,7 +3,7 @@ import { Subscription                     } from 'rxjs/Subscription';
 import { MatDividerModule                 } from '@angular/material';
 
 import { TControllerService               } from '../../../services/controller/tcontroller.service'; 
-import { TSearch                          } from '../../../lib/types/search/tsearch';
+import { TQuery                          } from '../../../lib/types/search/tquery';
 import { TProduct                         } from '../../../lib/types/product/tproduct';
 import { TLogoComponent                   } from '../../widgets/tlogo/tlogo.component';
 import { TGoCartButtonComponent           } from '../../widgets/tgo-cart-button/tgo-cart-button.component';
@@ -24,6 +24,7 @@ export class TLandingComponent implements OnInit
     {
         let instance: TLandingComponent = this;
         
+        /* Subscribe to product changes. UI will observe via #getObserved() (trackBy directive in associated html template)  */
         this.fReceiverProducts = this.fController.subscribeToPushProducts().subscribe 
         (
             function (list: TProduct[])
@@ -35,7 +36,9 @@ export class TLandingComponent implements OnInit
 
     ngOnInit()
     {
-        this.fController.queryProducts ("", TControllerService.kIDCategoryMostPopular, false);
+        this.fController.setQueryCategory   (TControllerService.kIDCategoryMostPopular);
+        this.fController.setQuerySearchTerm ("");
+        this.fController.queryProducts      ();
     }
     
     getObserved (): TProduct[]

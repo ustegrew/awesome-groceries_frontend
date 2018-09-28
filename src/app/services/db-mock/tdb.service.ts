@@ -1,25 +1,159 @@
-import { Injectable, Inject, forwardRef     } from '@angular/core';
-import { TConnectorControllerStoreService   } from '../_inter/tconnector-controller-store.service'; /* [1] */
-import { TConfig                            } from '../../tconfig';
-import { TProduct                           } from '../../lib/types/product/tproduct';
-import { TCategory                          } from '../../lib/types/product/tcategory';
-import { TSearch                            } from '../../lib/types/search/tsearch';
+import { TCategory          }               from "../../lib/types/product/tcategory";
+import { TProduct           }               from "../../lib/types/product/tproduct";
+import { TQuery             }               from "../../lib/types/search/tquery";
+import { TConfig            }               from "../../tconfig";
+import { Injectable         }               from '@angular/core';
+import { Observable         }               from "rxjs";
 
-/**
- * Product store. Accessor to the backend. This is the mockup class.
- */
 @Injectable()
-export class TProductStoreMockService
+export class TDBService
 {
-    static readonly         kIDCategoryMostPopular: string = TConfig.kIDCategoryMostPopular;
-    static readonly         kIDCategoryAll        : string = TConfig.kIDCategoryAll;
-    static readonly         kPopularityThreshold  : number = 0.80;
+    static readonly                 kIDCategoryMostPopular  : string  = TConfig.kIDCategoryMostPopular;
+    static readonly                 kIDCategoryAll          : string  = TConfig.kIDCategoryAll;
+    static readonly                 kPopularityThreshold    : number  = 0.80;
     
-    private fArticles:      TProduct[] = [];
-    private fCategories:    Map<string, TCategory>;
-
-    constructor(private fController: TConnectorControllerStoreService)
+    private fArticles:              TProduct[] = [];
+    private fCategories:            Map<string, TCategory>;
+    
+    public queryCategories () : Observable<TCategory[]>
     {
+        let n               : number;
+        let k               : string;
+        let c               : TCategory;
+        let cc              : TCategory[];
+        let ret             : Observable<TCategory[]>
+        
+        cc   = [];
+        n    = this.fCategories.size;
+        if (n >= 1)
+        {
+            for (k of Array.from (this.fCategories.keys()))
+            {
+                c = this.fCategories.get (k);
+                cc.push (c);
+            }
+        }
+        ret = new Observable
+              (
+                  (observer) =>
+                  {
+                      observer.next (cc);
+                      observer.complete ();
+                  }
+              );
+        
+        return ret;
+    }
+    
+    public queryProducts (query: TQuery) : Observable<TProduct[]>
+    {
+        let n               : number;
+        let i               : number;
+        let p               : TProduct;
+        let rx              : RegExp;
+        let doesMatch       : boolean;
+        let list            : TProduct[];
+        let ret             : Observable<TProduct[]>;
+        
+        // TODO Lots of code duplication - can be optimized.
+        list = [];
+        n    = this.fArticles.length;
+        if (n >= 1)
+        {
+            for (i = 0; i < n; i++)
+            {
+                p = this.fArticles [i];
+                
+                if (query.fSearchTerm == "")
+                {
+                    if (query.fCategory == TDBService.kIDCategoryAll)
+                    {
+                        list.push (p);
+                    }
+                    else if (query.fCategory == TDBService.kIDCategoryMostPopular)
+                    {
+                        if (p.fPopularity >= TDBService.kPopularityThreshold)
+                        {
+                            list.push (p);
+                        }
+                    }
+                    else if (query.fCategory == p.fCategory.fID)
+                    {
+                        list.push (p);
+                    }
+                }
+                else
+                {
+                    rx          = new RegExp (query.fSearchTerm, "i");
+                    doesMatch   = rx.test (p.fProductType);
+                    if (doesMatch)
+                    {
+                        if (query.fCategory == "")
+                        {
+                            list.push (p);
+                        }
+                        else
+                        {
+                            if (query.fCategory == TDBService.kIDCategoryAll)
+                            {
+                                list.push (p);
+                            }
+                            else if (query.fCategory == TDBService.kIDCategoryMostPopular)
+                            {
+                                if (p.fPopularity >= TDBService.kPopularityThreshold)
+                                {
+                                    list.push (p);
+                                }
+                            }
+                            else if (query.fCategory == p.fCategory.fID)
+                            {
+                                list.push (p);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        ret  = new Observable 
+               (
+                   (observer) => 
+                   {
+                       observer.next     (list);
+                       observer.complete ();
+                   }
+               );
+        return ret;
+    }
+    
+    /**
+     * Some would claim that it's not good to have the constructor do real work, see
+     * https://v5.angular.io/guide/lifecycle-hooks#oninit
+     * http://misko.hevery.com/code-reviewers-guide/flaw-constructor-does-real-work/
+     * 
+     * Instead, we should use ngOnInit() for heavy initializations.  
+     * For me, this is still confusing - I'm used to have the cTor do all the init work, and this 
+     * is a service, not a component.
+     * 
+     * In general - when should I use ngOnInit() and when cTor? ngOnInit() only for components?
+     * For services as well? Or will ngOnInit() not work for services?
+     * 
+     * As a simple decision: This is a mockup class which just mocks the real database and won't be 
+     * used in production. Hence I will use the cTor for initialization here.
+     */
+    constructor () 
+    {
+        this._setData ();
+    }
+        
+    private _setData () : void
+    {
+        let meta: TCategory;
+        let n  : number;
+        let i  : number;
+        let p  : TProduct;
+        let has: boolean;
+    
         this.fArticles.push
         (
             new TProduct
@@ -343,110 +477,9 @@ export class TProductStoreMockService
                 "assets/img/tomato/tomatos_4.jpg"
             )
         );
-        this._setCategories ();
-
-        this.fController.setStore(this); /* [1] */
-    }
-
-    /**
-     * Executes a category query. Result is pushed back to the controller. We don't
-     * use a classic function call with return value, but push the result back. This
-     * makes the category query ready for asynchronous handling, e.g. when retrieving 
-     * data via HTTP request from a backend.
-     */
-    queryCategories () : void
-    {
-        let list: TCategory[];
-
-        list = [];
-        this.fCategories.forEach
-        (
-            function onItem (category: TCategory, id: string)
-            {
-                list.push (category);
-            }
-        );
-        
-        this.fController.pushCategories (list);
-    }
     
-    /**
-     * Executes a product query. Result is pushed back to the controller. We don't
-     * use a classic function call with return value, but push the result back. This
-     * makes the product query ready for asynchronous handling, e.g. when retrieving 
-     * data via HTTP request from a backend.
-     */
-    queryProducts (query: TSearch) : void
-    {
-        let n        : number;
-        let i        : number;
-        let p        : TProduct;
-        let rx       : RegExp;
-        let doesMatch: boolean;
-        let list     : TProduct[];
-
-// TODO Audit this heuristics
-        list = [];
-        n   = this.fArticles.length;
-        if (n >= 1)
-        {
-            for (i = 0; i < n; i++)
-            {
-                p = this.fArticles [i];
-                
-                if (query.fCategory == TProductStoreMockService.kIDCategoryAll)
-                {   /* Requested: All items. */
-                    list.push (p);
-                }
-                else if (query.fCategory == TProductStoreMockService.kIDCategoryMostPopular)
-                {   /* Requested: Most popular products. */
-                    if (p.fPopularity >= TProductStoreMockService.kPopularityThreshold)
-                    {
-                        list.push (p);
-                    }
-                }
-                else if (query.fCategory == p.fCategory.fID  &&  query.fSearchTerm == "")
-                {
-                    list.push (p);
-                }
-                else
-                {
-                    rx          = new RegExp (query.fSearchTerm, "i");
-                    doesMatch   = rx.test (p.fProductType);
-                    if (doesMatch)
-                    {   /* Requested: Products whose type matches search term */
-                        if (query.fIsRestrictToCategory)
-                        {   
-                            if (query.fCategory == p.fCategory.fID)
-                            {
-                                list.push (p);
-                            }
-                        }
-                        else
-                        {
-                            list.push (p);
-                        }
-                    }
-                }
-            }
-        }
-        
-        this.fController.pushProducts (list);
-    }
-    
-    /**
-     * Extracts list of categories from the products.
-     */
-    private _setCategories (): void
-    {
-        let meta: TCategory;
-        let n  : number;
-        let i  : number;
-        let p  : TProduct;
-        let has: boolean;
-    
-        this.fCategories = new Map ();
-        meta    = new TCategory (TProductStoreMockService.kIDCategoryMostPopular, "Most popular");
+        this.fCategories    = new Map ();
+        meta                = new TCategory (TDBService.kIDCategoryMostPopular, "Most popular");
         this.fCategories.set(meta.fID, meta);
 
         n       = this.fArticles.length;
@@ -464,12 +497,3 @@ export class TProductStoreMockService
         }
     }
 }
-
-/*
-[1]: Connector service - breaks circular dependency between TController service and 
-     TProductStore service. These depend on each other, but if we have them call each
-     other's methods directly we get a 'circular dependency' warning on the web console.
-     Plus, the web app might not work. Angular offers forward references; I tried those,
-     but still got circular dependency warnings. 
-*/
-

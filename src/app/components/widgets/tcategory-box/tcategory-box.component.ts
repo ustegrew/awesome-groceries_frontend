@@ -17,13 +17,20 @@ export class TCategoryBoxComponent implements OnInit
     {
         let instance: TCategoryBoxComponent = this;
     
+        fController.subscribeToPushCategories().subscribe 
+        (
+            list => this.fCategories = list
+        );
+    /*
         this.fDataSource = this.fController.subscribeToPushCategories ().subscribe 
         (
+            
             function (list: TCategory [])
             {
-                TCategoryBoxComponent._setCategories(instance, list); /* [1] */
+                TCategoryBoxComponent._setCategories(instance, list); //* [1] /* /
             }
         );
+    */
     }
 
     ngOnInit() 
@@ -45,26 +52,8 @@ export class TCategoryBoxComponent implements OnInit
     
     onChangeValue (choice: string) : void
     {
-        this.fController.queryProducts ("", choice, false);
-    }
-    
-    /**
-     * Updates the category list. Note, this is called via push from the controller
-     * i.e. category list will refresh itself every time the controller pushes new data.
-     * This component automatically refreshes the UI widget via {@link #getCategories}
-     * 
-     * @param instance      The instance hosting this callback. As this callback is invoked
-     *                      from an asynchronous handler (defined in the cTor) we can't use the
-     *                      'this' reference but must supply a reference to the category 
-     *                      box component instance.
-     * @param list          The categories to set.
-     */
-    private static _setCategories (instance: TCategoryBoxComponent, list: TCategory []): void
-    {
-        instance.fCategories = list;
+        this.fController.setQueryCategory   (choice);
+        this.fController.queryProducts      ();
     }
 }
 
-/*
-[1]: What does 'this' refer to here?
-*/
