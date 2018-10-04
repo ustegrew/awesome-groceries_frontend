@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body
+            {
+                font-family:                Arial, Helvetica, sans-serif;
+            }
+
+            /* Full-width input fields */
+            input[type=text], input[type=password]
+            {
+                width:                      100%;
+                padding:                    12px 20px;
+                margin:                     8px 0;
+                display:                    inline-block;
+                border:                     1px solid #ccc;
+                box-sizing:                 border-box;
+            }
+
+            /* Set a style for all buttons */
+            button
+            {
+                background-color:           #4CAF50;
+                color:                      white;
+                padding:                    14px 20px;
+                margin:                     8px 0;
+                border:                     none;
+                cursor:                     pointer;
+                width:                      100%;
+            }
+
+            button:hover
+            {
+                opacity:                    0.8;
+            }
+
+            /* Extra styles for the cancel button */
+            .cancelbtn
+            {
+                width:                      auto;
+                padding:                    10px 18px;
+                background-color:           #f44336;
+            }
+
+            /* Center the image and position the close button */
+            .imgcontainer
+            {
+                text-align:                 center;
+                margin:                     24px 0 12px 0;
+                position:                   relative;
+            }
+
+            img.avatar
+            {
+                background-color:           blue;
+//                width:                      40%;
+                border-radius:              50%;
+            }
+
+            .container
+            {
+                padding:                    16px;
+            }
+
+            span.psw
+            {
+                float:                      right;
+                padding-top:                16px;
+            }
+
+            /* The Modal (background) */
+            .modal
+            {
+                display:                    none;
+                /* Hidden by default */
+                position:                   fixed;
+                /* Stay in place */
+                z-index:                    1;
+                /* Sit on top */
+                left:                       0;
+                top:                        0;
+                width:                      100%;
+                /* Full width */
+                height:                     100%;
+                /* Full height */
+                overflow:                   auto;
+                /* Enable scroll if needed */
+                background-color:           rgb(0,0,0);
+                /* Fallback color */
+                background-color:           rgba(0,0,0,0.4);
+                /* Black w/ opacity */
+                padding-top:                60px;
+            }
+
+            /* Modal Content/Box */
+            .modal-content
+            {
+                background-color:           #fefefe;
+                margin:                     5% auto 15% auto;
+                /* 5% from the top, 15% from the bottom and centered */
+                border:                     1px solid #888;
+                width:                      80%;
+                /* Could be more or less, depending on screen size */
+            }
+
+            /* The Close Button (x) */
+            .close
+            {
+                position:                   absolute;
+                right:                      25px;
+                top:                        0;
+                color:                      #000;
+                font-size:                  35px;
+                font-weight:                bold;
+            }
+
+            .close:hover, .close:focus
+            {
+                color:                      red;
+                cursor:                     pointer;
+            }
+
+            /* Add Zoom Animation */
+            .animate
+            {
+                -webkit-animation:          animatezoom 0.2s;
+                animation:                  animatezoom 0.2s
+            }
+
+            @-webkit-keyframes animatezoom
+            {
+                from
+                {
+                    -webkit-transform:      scale(0)
+                }
+                to
+                {
+                    -webkit-transform:      scale(1)
+                }
+            }
+
+            @keyframes animatezoom
+            {
+                from
+                {
+                    transform:              scale(0)
+                }
+                to
+                {
+                    transform:              scale(1)
+                }
+            }
+
+            /* Change styles for span and cancel button on extra small screens */
+            @media screen and (max-width: 300px)
+            {
+                span.psw
+                {
+                    display:                block;
+                    float:                  none;
+                }
+                .cancelbtn
+                {
+                    width:                  100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Modal Login Form</h2>
+        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+        <div id="id01" class="modal">
+            <form class="modal-content animate" action="/action_page.php">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    <img alt="Avatar" class="avatar" src="data:image/jpeg;base64,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">
+                </div>
+                <div class="container">
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="uname" required oninvalid="this.setCustomValidity('I need your username')" oninput="this.setCustomValidity('')">
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" required oninvalid="this.setCustomValidity('I need your password')" oninput="this.setCustomValidity('')">
+                    <button type="submit">Login</button>
+                    <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                    </label>
+                </div>
+                <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                    <span class="psw">Forgot <a href="#">password?</a></span>
+                </div>
+            </form>
+        </div>
+        <script>
+            // Get the modal
+            var modal = document.getElementById('id01');
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event)
+            {
+                if (event.target == modal)
+                {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+    </body>
+</html>
