@@ -1,4 +1,5 @@
 import { Component, OnInit, Directive, Renderer2, ElementRef            } from '@angular/core';
+import { TControllerService                                             } from '../../../services/controller/tcontroller.service';
 import { TProduct                                                       } from '../../../lib/types/product/tproduct';
 
 @Component({
@@ -12,10 +13,19 @@ export class TDetailsDialogModalComponent implements OnInit
     fModalAddendum          : string;
     fModalContentAddendum   : string;
     
-    constructor (private el: ElementRef, renderer: Renderer2) 
+    constructor (private fController: TControllerService, private el: ElementRef, renderer: Renderer2) 
     {
         this.fModalAddendum             = "modal-hidden";
         this.fModalContentAddendum      = "modal-content-hidden";
+        
+        this.fController.subscribeToDetailRequests().subscribe
+        (
+            product =>
+            {
+                this.fProduct = product;
+                this.show ();
+            } 
+        );
     }
 
     ngOnInit() 
@@ -23,14 +33,13 @@ export class TDetailsDialogModalComponent implements OnInit
         this.fProduct = new TProduct ("", "", "", "", 0.0, "", "", "", "", "", "");
     }
 
-    show (product: TProduct)
+    private show ()
     {
-        this.fProduct                   = product;
         this.fModalAddendum             = "modal-shown";
         this.fModalContentAddendum      = "modal-content-shown";
     }
     
-    hide (clickTarget)
+    private hide (clickTarget)
     {
         if (typeof clickTarget  !==  'undefined')
         {

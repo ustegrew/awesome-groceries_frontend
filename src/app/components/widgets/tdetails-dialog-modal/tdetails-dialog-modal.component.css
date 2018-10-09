@@ -32,7 +32,7 @@
     border-radius:              10px;
     min-width:                  700px;
     max-width:                  900px;
-    height:                     410px;
+    height:                     500px;
 }
 .modal-content-hidden
 {   /* Collapse into from middle of viewport */
@@ -85,7 +85,7 @@
 }
 .main-body-product-image
 {
-    max-width:                  400px;
+    width:                      380px;
     max-height:                 400px;
 
     border:                     1px solid #aaaaaa;
@@ -99,6 +99,8 @@
     grid-template-columns:      max-content auto;
     grid-row-gap:               20px;
     grid-column-gap:            40px;
+    left:                       50%;
+    position:                   fixed;
 }
 .main-body-product-info-label
 {

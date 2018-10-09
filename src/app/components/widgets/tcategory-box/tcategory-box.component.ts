@@ -21,16 +21,6 @@ export class TCategoryBoxComponent implements OnInit
         (
             list => this.fCategories = list
         );
-    /*
-        this.fDataSource = this.fController.subscribeToPushCategories ().subscribe 
-        (
-            
-            function (list: TCategory [])
-            {
-                TCategoryBoxComponent._setCategories(instance, list); //* [1] /* /
-            }
-        );
-    */
     }
 
     ngOnInit() 

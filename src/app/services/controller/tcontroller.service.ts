@@ -16,8 +16,9 @@ export class TControllerService
     static readonly         kIDCategoryMostPopular: string = TConfig.kIDCategoryMostPopular;
     static readonly         kIDCategoryAll        : string = TConfig.kIDCategoryAll;
 
-    private fPushCategories     : Subject<TCategory[]>  = null;
-    private fPushProducts       : Subject<TProduct[]>   = null;
+    private fPushCategories     : Subject<TCategory[]>  = null; /* List push updates categories view (e.g. categories box on landing page) */
+    private fPushProducts       : Subject<TProduct[]>   = null; /* List push updates products view (e.g. cards on landing page) */
+    private fPushDetailRequest  : Subject<TProduct>     = null; /* Any product push brings up the details modal dlg */
     private fQueryID            : string;
     private fQueryCategory      : string;
     private fQuerySearchTerm    : string;
@@ -26,6 +27,7 @@ export class TControllerService
     {
         this.fPushCategories    = new Subject<TCategory[]> ();
         this.fPushProducts      = new Subject<TProduct[]> ();
+        this.fPushDetailRequest = new Subject<TProduct> ();
         this.fQueryID           = "";
         this.fQueryCategory     = "";
         this.fQuerySearchTerm   = "";
@@ -105,6 +107,19 @@ export class TControllerService
     {
         this.fQueryID           = "";
         this.fQuerySearchTerm   = term;
+    }
+    
+    showDetails (id: string)
+    {
+        let pushed : TProduct;
+        
+        pushed = this.fStore.queryByID (id);
+        this.fPushDetailRequest.next (pushed)
+    }
+    
+    subscribeToDetailRequests () : Observable<TProduct>
+    {
+        return this.fPushDetailRequest.asObservable ();
     }
     
     /**
