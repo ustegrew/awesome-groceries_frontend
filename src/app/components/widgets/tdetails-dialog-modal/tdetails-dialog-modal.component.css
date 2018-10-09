@@ -32,7 +32,7 @@
     border-radius:              10px;
     min-width:                  700px;
     max-width:                  900px;
-    height:                     500px;
+    height:                     420px;
 }
 .modal-content-hidden
 {   /* Collapse into from middle of viewport */
@@ -85,8 +85,8 @@
 }
 .main-body-product-image
 {
-    width:                      380px;
-    max-height:                 400px;
+    max-width:                  380px;
+    height:                     300px;
 
     border:                     1px solid #aaaaaa;
     border-radius:              10px;
