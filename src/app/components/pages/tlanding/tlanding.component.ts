@@ -1,14 +1,15 @@
-import { Component, OnInit                } from '@angular/core';
-import { Subscription                     } from 'rxjs/Subscription';
-import { MatDividerModule                 } from '@angular/material';
+import { Component, OnInit, Input               } from '@angular/core';
+import { Subscription                           } from 'rxjs/Subscription';
+import { MatDividerModule                       } from '@angular/material';
 
-import { TControllerService               } from '../../../services/controller/tcontroller.service'; 
-import { TQuery                          } from '../../../lib/types/search/tquery';
-import { TProduct                         } from '../../../lib/types/product/tproduct';
-import { TLogoComponent                   } from '../../widgets/tlogo/tlogo.component';
-import { TGoCartButtonComponent           } from '../../widgets/tgo-cart-button/tgo-cart-button.component';
-import { TCategoryBoxComponent            } from '../../widgets/tcategory-box/tcategory-box.component';
-import { TSearchComponent                 } from '../../widgets/tsearch/tsearch.component';
+import { TControllerService                     } from '../../../services/controller/tcontroller.service'; 
+import { TQuery                                 } from '../../../lib/types/search/tquery';
+import { TProduct                               } from '../../../lib/types/product/tproduct';
+import { TLogoComponent                         } from '../../widgets/tlogo/tlogo.component';
+import { TGoCartButtonComponent                 } from '../../widgets/tgo-cart-button/tgo-cart-button.component';
+import { TCategoryBoxComponent                  } from '../../widgets/tcategory-box/tcategory-box.component';
+import { TSearchComponent                       } from '../../widgets/tsearch/tsearch.component';
+import { TDetailsDialogModalComponent           } from '../../widgets/tdetails-dialog-modal/tdetails-dialog-modal.component';
 
 @Component({
   selector: 'app-tlanding',
@@ -17,9 +18,9 @@ import { TSearchComponent                 } from '../../widgets/tsearch/tsearch.
 })
 export class TLandingComponent implements OnInit
 {
-    private fProducts           : TProduct[];
+    private fProducts           : TProduct [];
     private fReceiverProducts   : Subscription;
-    
+
     constructor (private fController: TControllerService)
     {
         let instance: TLandingComponent = this;

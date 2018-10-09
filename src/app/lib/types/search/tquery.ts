@@ -1,5 +1,6 @@
 export class TQuery 
 {
+    fID:                    string;
     fCategory:              string;
     fSearchTerm:            string;
 
@@ -8,6 +9,7 @@ export class TQuery
         let ret: string;
         
         ret = "{" +
+                  "id:"         + this.fID + "," +
                   "searchTerm:" + this.fSearchTerm + "," +
                   "category:"   + this.fCategory
               "}";
@@ -17,10 +19,12 @@ export class TQuery
     
     constructor 
     (
+        id:                         string,
         searchTerm:                 string,
         category:                   string
     )
     {
+        this.fID                    = id;
         this.fSearchTerm            = searchTerm;
         this.fCategory              = category;
     }

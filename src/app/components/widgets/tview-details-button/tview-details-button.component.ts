@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { TProduct }                 from '../../../lib/types/product/tproduct';
+import { Component, OnInit, Input           } from '@angular/core';
+import { TProduct                           } from '../../../lib/types/product/tproduct';
+import { TControllerService                 } from '../../../services/controller/tcontroller.service';
 
 @Component({
   selector: 'app-tview-details-button',
@@ -8,9 +9,9 @@ import { TProduct }                 from '../../../lib/types/product/tproduct';
 })
 export class TViewDetailsButtonComponent implements OnInit 
 {
-    @Input() articleID: string;
-
-    constructor()
+    @Input()    fArticleID:     string;
+    
+    constructor (private fController: TControllerService)
     {
     }
 
@@ -18,8 +19,11 @@ export class TViewDetailsButtonComponent implements OnInit
     {
     }
   
-    gotClick() : void
+    onClick () : void
     {
-        console.log ("Details for " + this.articleID);
+        let p : TProduct;
+        
+        p = this.fController.queryByID (this.fArticleID);
+        console.log (p);
     }
 }

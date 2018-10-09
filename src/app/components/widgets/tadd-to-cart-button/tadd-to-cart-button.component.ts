@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TAddToCartButtonComponent implements OnInit 
 {
-    @Input() articleID: string;
+    @Input() fArticleID: string;
 
     constructor() 
     {
@@ -18,8 +18,8 @@ export class TAddToCartButtonComponent implements OnInit
     {
     }
   
-    gotClick (): void
+    onClick (): void
     {
-        console.log ("Add one qty to cart: " + this.articleID);
+        console.log ("Add one qty to cart: " + this.fArticleID);
     }
 }

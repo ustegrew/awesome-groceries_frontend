@@ -19,7 +19,7 @@ import { TViewDetailsButtonComponent            } from './components/widgets/tvi
 import { TAddToCartButtonComponent              } from './components/widgets/tadd-to-cart-button/tadd-to-cart-button.component';
 import { TProductDetailsPanelComponent          } from './components/widgets/tproduct-details-panel/tproduct-details-panel.component';
 import { TFourOhFourComponent                   } from './components/pages/tfour-oh-four/tfour-oh-four.component';
-import { TdetailsDialogModalComponent } from './components/widgets/tdetails-dialog-modal/tdetails-dialog-modal.component';
+import { TDetailsDialogModalComponent           } from './components/widgets/tdetails-dialog-modal/tdetails-dialog-modal.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { TdetailsDialogModalComponent } from './components/widgets/tdetails-dial
     TAddToCartButtonComponent,
     TProductDetailsPanelComponent,
     TFourOhFourComponent,
-    TdetailsDialogModalComponent
+    TDetailsDialogModalComponent
   ],
   imports: [
     BrowserModule,

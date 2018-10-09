@@ -15,6 +15,30 @@ export class TDBService
     private fArticles:              TProduct[] = [];
     private fCategories:            Map<string, TCategory>;
     
+    public queryByID (id: string): TProduct
+    {
+        let n               : number;
+        let i               : number;
+        let p               : TProduct;
+        let ret             : TProduct;
+        
+        ret = null;
+        n   = this.fArticles.length;
+        if (n >= 1)
+        {
+            for (i = 0; i < n  &&  ret == null; i++)
+            {
+                p = this.fArticles [i];
+                if (p.fID == id)
+                {
+                    ret = p;
+                }
+            }
+        }
+        
+        return ret;
+    }
+    
     public queryCategories () : Observable<TCategory[]>
     {
         let n               : number;

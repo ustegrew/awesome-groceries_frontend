@@ -18,6 +18,7 @@ export class TControllerService
 
     private fPushCategories     : Subject<TCategory[]>  = null;
     private fPushProducts       : Subject<TProduct[]>   = null;
+    private fQueryID            : string;
     private fQueryCategory      : string;
     private fQuerySearchTerm    : string;
     
@@ -25,8 +26,18 @@ export class TControllerService
     {
         this.fPushCategories    = new Subject<TCategory[]> ();
         this.fPushProducts      = new Subject<TProduct[]> ();
+        this.fQueryID           = "";
         this.fQueryCategory     = "";
         this.fQuerySearchTerm   = "";
+    }
+    
+    queryByID (id: string): TProduct
+    {
+        let ret: TProduct;
+        
+        ret = this.fStore.queryByID (id);
+        
+        return ret;
     }
     
     /**
@@ -68,7 +79,7 @@ export class TControllerService
         let query       : TQuery;
         let receptacle  : Observable<TProduct[]>;
     
-        query       = new TQuery (this.fQuerySearchTerm, this.fQueryCategory);
+        query       = new TQuery (this.fQueryID, this.fQuerySearchTerm, this.fQueryCategory);
         receptacle  = this.fStore.queryProducts (query);
             
         receptacle.subscribe
@@ -77,14 +88,23 @@ export class TControllerService
         );
     }
     
+    setQueryID (id: string)
+    {
+        this.fQueryID           = id;
+        this.fQueryCategory     = "";
+        this.fQuerySearchTerm   = "";
+    }
+    
     setQueryCategory (category : string)
     {
-        this.fQueryCategory = category;
+        this.fQueryID           = "";
+        this.fQueryCategory     = category;
     }
     
     setQuerySearchTerm (term : string)
     {
-        this.fQuerySearchTerm = term;
+        this.fQueryID           = "";
+        this.fQuerySearchTerm   = term;
     }
     
     /**

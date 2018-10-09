@@ -1,0 +1,22 @@
+<div id="root" class="modal {{fModalAddendum}}" (click)="hide ($event.target.id)">
+    <div id="root-a" class="modal-content {{fModalContentAddendum}}">
+        <div class="title-bar">
+            <span class="title-bar-title">{{fProduct.fDetailName}}</span>
+            <span id="close-button" class="title-bar-window-buttons" (click)="hide ($event.target.id)">&times;</span>
+        </div>
+        <div class="main-body">
+            <img alt="" class="main-body-product-image" src="{{fProduct.fURLPhoto}}">
+            <div class="main-body-product-info">
+                <div class="main-body-product-info-label">Origin</div>
+                <div class="main-body-product-info-value">{{fProduct.fOriginCountry}}</div>
+                <div class="main-body-product-info-label">Price / {{fProduct.fPriceUnit}}</div>
+                <div class="main-body-product-info-value">€{{fProduct.fPrice}}</div>
+                <div>&nbsp;</div>
+                <div class="main-body-actions">
+                    <input id="txtamount" type="number" min="1" value="1">
+                    <button id="btnaddtocart">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,6 +8,15 @@ import { Observable     } from "rxjs";
 @Injectable()
 export class TProductStoreService 
 {
+    public queryByID (id: string): TProduct
+    {
+        let ret: TProduct;
+        
+        ret = this.fDB.queryByID (id);
+        
+        return ret;
+    }
+    
     public queryCategories () : Observable<TCategory[]>
     {
         let ret : Observable<TCategory[]>;
@@ -27,6 +36,4 @@ export class TProductStoreService
     }
         
     public constructor (private fDB: TDBService) {}
-    
-    
 }

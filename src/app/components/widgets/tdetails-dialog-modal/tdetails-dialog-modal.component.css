@@ -1,155 +1,140 @@
-body 
-{
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Full-width input fields */
-input[type=text], input[type=password] 
-{
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-/* Set a style for all buttons */
-button 
-{
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-button:hover 
-{
-    opacity: 0.8;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn 
-{
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
-}
-
-/* Center the image and position the close button */
-.imgcontainer 
-{
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
-}
-
-img.avatar 
-{
-    width: 40%;
-    border-radius: 50%;
-}
-
-.container 
-{
-    padding: 16px;
-}
-
-span.psw 
-{
-    float: right;
-    padding-top: 16px;
-}
-
 /* The Modal (background) */
-.modal 
+.modal   /* Cover layer */
 {
-    display: none;
-    /* Hidden by default */
-    position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0,0,0);
-    /* Fallback color */
-    background-color: rgba(0,0,0,0.4);
-    /* Black w/ opacity */
-    padding-top: 60px;
+    font-family:                sans-serif;
+    left:                       0;                      /* Top left corner of the viewport                      */
+    top:                        0;
+    width:                      100%;                   /* Fill entire view area                                */
+    height:                     100%;
+    position:                   fixed;                  /* Fixed to the same position                           */
+    z-index:                    1;                      /* On top of everything excpt dialog                    */
+    overflow:                   auto;                   /* If page is larger than viewport, enable scrolling    */
+    background-color:           rgba(255,255,255,0.9);  /* White with 90% opacity                               */
+}
+.modal-hidden
+{   /* Fade out */
+    visibility:                 hidden;
+    opacity:                    0;
+    transition:                 visibility 0s linear 0.2s, opacity 0.2s linear;
+}
+.modal-shown
+{   /* Fade in */
+    visibility:                 visible;
+    opacity:                    1;
+    transition:                 opacity 0.2s linear;
+}
+.modal-content /* Content box */
+{
+    font-family:                inherit;
+    background-color:           #ffffff;
+    margin:                     5% auto 15% auto;       /* 5% from the top, 15% from the bottom and centered    */
+    border:                     2px solid #cccccc;
+    border-radius:              10px;
+    min-width:                  700px;
+    max-width:                  900px;
+    height:                     410px;
+}
+.modal-content-hidden
+{   /* Collapse into from middle of viewport */
+    transform:                  scale(0);
+    transition:                 transform 0.3s linear;
+}
+.modal-content-shown
+{   /* Grow in from middle of viewport. */
+    transform:                  scale(1);
+    transition:                 transform 0.2s ease;
 }
 
-/* Modal Content/Box */
-.modal-content 
+/* Title bar & friends */
+.title-bar
 {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto;
-    /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 80%;
-    /* Could be more or less, depending on screen size */
+    background-color:           #cccccc;
+    padding:                    15px;
+    border-top-left-radius:     8px;
+    border-top-right-radius:    8px;
+}
+.title-bar-title
+{
+    font-size:                  2em;
+    font-weight:                bold;
+    color:                      #3333ff;
+    width:                      100%;
+}
+.title-bar-window-buttons
+{
+    font-size:                  3em;
+    font-weight:                bolder;
+    color:                      #8080ff;
+    float:                      right;
+    transform:                  translate(0px,-10px);
+}
+.title-bar-window-buttons:hover 
+{
+    color:                      #0000ff;
+    cursor:                     pointer;
 }
 
-/* The Close Button (x) */
-.close 
+/* Main body */
+.main-body
 {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bold;
+    font-size:                  1.5em;
+    display:                    grid;
+    margin-top:                 20px;
+    grid-template-columns:      max-content 370px;
+    grid-column-gap:            20px;
+}
+.main-body-product-image
+{
+    max-width:                  400px;
+    max-height:                 400px;
+
+    border:                     1px solid #aaaaaa;
+    border-radius:              10px;
+    box-shadow:                 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left:                15px;
+}
+.main-body-product-info
+{
+    display:                    grid;
+    grid-template-columns:      max-content auto;
+    grid-row-gap:               20px;
+    grid-column-gap:            40px;
+}
+.main-body-product-info-label
+{
+    font-weight:                bold;
+    color:                      #3333ff;
+    text-align:                 left;
+}
+.main-body-product-info-value
+{
+    color:                      #2000ff;
+    text-align:                 left;
 }
 
-.close:hover, .close:focus {
-    color: red;
-    cursor: pointer;
-}
-
-/* Add Zoom Animation */
-.animate 
+/* Add-to-cart button etc. */
+.main-body-actions
 {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
+    text-align:                 left;
+    margin-bottom:              100%;
 }
-
-@-webkit-keyframes animatezoom 
+#txtamount
 {
-    from {
-        -webkit-transform: scale(0)
-    }
-    to {
-        -webkit-transform: scale(1)
-    }
+    width:                      2em;
+    height:                     20px;
+    font-size:                  0.8em;
+    text-align:                 right;
 }
-
-@keyframes animatezoom 
+#btnaddtocart
 {
-    from {
-        transform: scale(0)
-    }
-    to {
-        transform: scale(1)
-    }
+    background-color:           #33cc00;
+    width:                      75px;
+    height:                     25px;
+    vertical-align:             middle;
+    border-radius:              5px;
+    border:                     0;
 }
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) 
+#btnaddtocart:hover
 {
-    span.psw {
-        display: block;
-        float: none;
-    }
-    .cancelbtn {
-        width: 100%;
-    }
+    background-color:           #60ff00;
 }
