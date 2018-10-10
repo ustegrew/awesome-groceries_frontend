@@ -9,5 +9,5 @@ import { TProduct                               } from './lib/types/product/tpro
 })
 export class AppComponent
 {
-    @ViewChild('detailsModal') fDetailsModal : TDetailsDialogModalComponent;
+    @ViewChild('detailsModal') fDetailsModal: TDetailsDialogModalComponent;
 }

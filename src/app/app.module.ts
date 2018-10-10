@@ -8,7 +8,6 @@ import { TControllerService                     } from './services/controller/tc
 import { TProductStoreService                   } from './services/product/store/tproduct-store.service';
 import { TDBService                             } from './services/db-mock/tdb.service';
 import { TLandingComponent                      } from './components/pages/tlanding/tlanding.component';
-import { TDetailsComponent                      } from './components/pages/tdetails/tdetails.component';
 import { TCartComponent                         } from './components/pages/tcart/tcart.component';
 import { TLogoComponent                         } from './components/widgets/tlogo/tlogo.component';
 import { TGoCartButtonComponent                 } from './components/widgets/tgo-cart-button/tgo-cart-button.component';
@@ -20,12 +19,12 @@ import { TAddToCartButtonComponent              } from './components/widgets/tad
 import { TProductDetailsPanelComponent          } from './components/widgets/tproduct-details-panel/tproduct-details-panel.component';
 import { TFourOhFourComponent                   } from './components/pages/tfour-oh-four/tfour-oh-four.component';
 import { TDetailsDialogModalComponent           } from './components/widgets/tdetails-dialog-modal/tdetails-dialog-modal.component';
+import { TShoppingCartCounterComponent          } from './components/widgets/tshopping-cart-counter/tshopping-cart-counter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TLandingComponent,
-    TDetailsComponent,
     TCartComponent,
     TLogoComponent,
     TGoCartButtonComponent,
@@ -36,7 +35,8 @@ import { TDetailsDialogModalComponent           } from './components/widgets/tde
     TAddToCartButtonComponent,
     TProductDetailsPanelComponent,
     TFourOhFourComponent,
-    TDetailsDialogModalComponent
+    TDetailsDialogModalComponent,
+    TShoppingCartCounterComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +45,7 @@ import { TDetailsDialogModalComponent           } from './components/widgets/tde
     ReactiveFormsModule,
     MatDividerModule
   ],
-  providers: 
+  providers:
   [
       TControllerService,
       TProductStoreService,
@@ -55,4 +55,3 @@ import { TDetailsDialogModalComponent           } from './components/widgets/tde
   exports: []
 })
 export class AppModule { }
- 

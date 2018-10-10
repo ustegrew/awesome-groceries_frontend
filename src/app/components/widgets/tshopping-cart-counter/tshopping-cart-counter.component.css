@@ -1,0 +1,9 @@
+.flag
+{
+    font-family:                Arial, Helvetica, sans-serif;
+    border-radius:              50%;
+    background-color:         #103cff;
+    color:                    #ffffff;
+    font-size:                  1.2em;
+    font-weight:                bold;
+}

@@ -2,7 +2,7 @@ import { Component, OnInit, Input               } from '@angular/core';
 import { Subscription                           } from 'rxjs/Subscription';
 import { MatDividerModule                       } from '@angular/material';
 
-import { TControllerService                     } from '../../../services/controller/tcontroller.service'; 
+import { TControllerService                     } from '../../../services/controller/tcontroller.service';
 import { TQuery                                 } from '../../../lib/types/search/tquery';
 import { TProduct                               } from '../../../lib/types/product/tproduct';
 import { TLogoComponent                         } from '../../widgets/tlogo/tlogo.component';
@@ -18,30 +18,25 @@ import { TDetailsDialogModalComponent           } from '../../widgets/tdetails-d
 })
 export class TLandingComponent implements OnInit
 {
-    private fProducts           : TProduct [];
-    private fReceiverProducts   : Subscription;
+    private fProducts:         TProduct [];
+    private fReceiverProducts: Subscription;
 
     constructor (private fController: TControllerService)
     {
-        let instance: TLandingComponent = this;
-        
         /* Subscribe to product changes. UI will observe via #getObserved() (trackBy directive in associated html template)  */
-        this.fReceiverProducts = this.fController.subscribeToPushProducts().subscribe 
+        this.fReceiverProducts = this.fController.subscribeToPushProducts().subscribe
         (
-            function (list: TProduct[])
-            {
-                instance.fProducts = list;
-            }
+            list => this.fProducts = list
         );
     }
 
     ngOnInit()
     {
         this.fController.setQueryCategory   (TControllerService.kIDCategoryMostPopular);
-        this.fController.setQuerySearchTerm ("");
+        this.fController.setQuerySearchTerm ('');
         this.fController.queryProducts      ();
     }
-    
+
     getObserved (): TProduct[]
     {
         return this.fProducts;
