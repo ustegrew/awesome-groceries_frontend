@@ -10,6 +10,7 @@ import { TGoCartButtonComponent                 } from '../../widgets/tgo-cart-b
 import { TCategoryBoxComponent                  } from '../../widgets/tcategory-box/tcategory-box.component';
 import { TSearchComponent                       } from '../../widgets/tsearch/tsearch.component';
 import { TDetailsDialogModalComponent           } from '../../widgets/tdetails-dialog-modal/tdetails-dialog-modal.component';
+import { TPriceCounterComponent                 } from '../../widgets/tprice-counter/tprice-counter.component';
 
 @Component({
   selector: 'app-tlanding',

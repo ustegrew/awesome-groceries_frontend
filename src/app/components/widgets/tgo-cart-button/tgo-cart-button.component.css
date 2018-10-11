@@ -1,9 +1,29 @@
-button
+.actuator
 {
-    background-color:               #33cc00;
-    width:                          96px;
-    vertical-align:                 middle;
+    background-color:             #33cc00;
+    width:                          9em;
+    height:                         3em;
+    text-align:                     left;
     padding:                        5px;
     border-radius:                  8px;
-    border:                         0;
+    border:                         0px;
+    position:                       relative;
+}
+
+.actuator:hover
+{
+    background-color:             #40ff00;
+}
+
+.actuator:focus
+{
+    outline:                        none;
+}
+
+.icon
+{
+    position:                       absolute;
+    bottom:                         0.5em;
+    right:                          0.5em;
+    pointer-events:                 none;
 }

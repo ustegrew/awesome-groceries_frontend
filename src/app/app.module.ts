@@ -20,6 +20,7 @@ import { TProductDetailsPanelComponent          } from './components/widgets/tpr
 import { TFourOhFourComponent                   } from './components/pages/tfour-oh-four/tfour-oh-four.component';
 import { TDetailsDialogModalComponent           } from './components/widgets/tdetails-dialog-modal/tdetails-dialog-modal.component';
 import { TShoppingCartCounterComponent          } from './components/widgets/tshopping-cart-counter/tshopping-cart-counter.component';
+import { TPriceCounterComponent                 } from './components/widgets/tprice-counter/tprice-counter.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { TShoppingCartCounterComponent          } from './components/widgets/tsh
     TProductDetailsPanelComponent,
     TFourOhFourComponent,
     TDetailsDialogModalComponent,
-    TShoppingCartCounterComponent
+    TShoppingCartCounterComponent,
+    TPriceCounterComponent
   ],
   imports: [
     BrowserModule,

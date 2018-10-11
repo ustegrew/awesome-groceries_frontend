@@ -1,28 +1,35 @@
-<div id="root">
-	<div id="root-a">
-		<div>
-		    <app-tlogo></app-tlogo>
-		</div>
+<div class="root-panel">
+    <div class="top-bar">
         <div>
-            <app-tshopping-cart-counter></app-tshopping-cart-counter>
-            <app-tgo-cart-button></app-tgo-cart-button>
+            <app-tlogo></app-tlogo>
+        </div>
+        <div class="shopping-cart-panel">
+            <div class="shopping-cart-button">
+                <app-tgo-cart-button></app-tgo-cart-button>
+            </div>
+            <div class="shopping-cart-counter">
+                <app-tshopping-cart-counter></app-tshopping-cart-counter>
+            </div>
+            <div class="shopping-cart-price">
+                <app-tprice-counter></app-tprice-counter>
+            </div>
         </div>
     </div>
     <mat-divider></mat-divider><!-- predefined: angular material -->
-	<div id="root-b">
-	    <div>
+    <div class="search-bar">
+        <div class="category-box">
             <app-tcategory-box></app-tcategory-box>
-	    </div>
-        <div>
-	        <app-tsearch></app-tsearch>
         </div>
-	</div>
+        <div class="search-box">
+            <app-tsearch></app-tsearch>
+        </div>
+    </div>
     <mat-divider></mat-divider><!-- predefined: angular material -->
-    <div id="root-c">
-	    <!-- FIXME: Product buttons inside block to be left aligned, and
-	                whole block of product buttons to be centered in flow panel. -->
-	    <div *ngFor="let article of getObserved (); trackBy: getObserved">
+    <div class="product-area">
+        <!-- FIXME: Product buttons inside block to be left aligned, and
+                    whole block of product buttons to be centered in flow panel. -->
+        <div class="product-card" *ngFor="let article of getObserved (); trackBy: getObserved">
             <app-tproduct-details-panel [article] = "article"></app-tproduct-details-panel>
-	    </div>
+        </div>
     </div>
 </div>

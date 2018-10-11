@@ -7,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TShoppingCartCounterComponent implements OnInit
 {
-    fNumItems: number;
+    fNumItems:          number;
 
     constructor ()
     {
-        this.fNumItems = 0;
+        this.fNumItems    = 0;
     }
 
     ngOnInit()

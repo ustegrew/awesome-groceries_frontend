@@ -1,41 +1,92 @@
-#root
+.root-panel
 {
-    display:            flex; 
-    flex-direction:     column; 
+    display:            flex;
+    flex-direction:     column;
     height:             calc(100vh - 20px);
 }
 
-#root-a
+.top-bar
 {
-    flex:               0 0 50px; 
-    display:            flex; 
-    flex-direction:     row; 
+    flex:               0 0 50px;
+    display:            flex;
+    flex-direction:     row;
     justify-content:    space-between;
 }
 
-#root-b
+.shopping-cart-panel
 {
-    flex:               0 0 30px; 
-    display:            flex; 
-    flex-direction:     row; 
+    position:           relative;     /* [100] */
+    height:             40px;
+}
+
+.shopping-cart-price
+{
+    position:           absolute;
+    bottom:             0.5em;
+    left:               1.5em;
+    pointer-events:     none;
+}
+
+.shopping-cart-counter
+{
+    position:           absolute;
+    left:               -6px;
+    top:                -2px;
+    pointer-events:     none;
+}
+
+.shopping-cart-button
+{
+    position:           relative;
+}
+
+.search-bar
+{
+    flex:               0 0 30px;
+    display:            flex;
+    flex-direction:     row;
     justify-content:    space-between;
 }
 
-#root-b > div
+.category-box
 {
     margin-top:         5px;
     margin-bottom:      5px;
 }
 
-#root-c
+.search-box
 {
-    display:            flex; 
-    flex-wrap:          wrap; 
-    justify-content:    flex-start; 
+    margin-top:         5px;
+    margin-bottom:      5px;
+}
+
+.product-area
+{
+    display:            flex;
+    flex-wrap:          wrap;
+    justify-content:    flex-start;
     overflow-y:         auto;
 }
 
-#root-c > div
+.product-card
 {
     margin:             10px;
 }
+
+/*
+[100]: The shopping cart counter is absolute with respect to the shopping cart button.
+       To accomplish this we have to set the position of the enclosing element to
+       'relative' - otherwise, the shopping cart counter will be absolute with respect to
+       the document body. On the enclosing element we'll also omit any further position
+       setting (such as 'left', 'top') as this will leave them at their default value
+       (zero).
+
+       Quote (https://www.w3schools.com/css/css_positioning.asp):
+           An element with position: absolute; is positioned relative to the nearest
+           positioned ancestor (instead of positioned relative to the viewport, like fixed).
+           However; if an absolute positioned element has no positioned ancestors,
+           it uses the document body, and moves along with page scrolling.
+           Note: A "positioned" element is one whose position is anything except static
+
+
+*/
