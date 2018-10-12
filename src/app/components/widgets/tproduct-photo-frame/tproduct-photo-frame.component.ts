@@ -6,15 +6,15 @@ import { TProduct                 } from '../../../lib/types/product/tproduct';
   templateUrl: './tproduct-photo-frame.component.html',
   styleUrls: ['./tproduct-photo-frame.component.css']
 })
-export class TProductPhotoFrameComponent implements OnInit 
+export class TProductPhotoFrameComponent implements OnInit
 {
-    @Input() urlPhoto : string;
-    
-    constructor() 
+    @Input() fUrlPhoto: string;
+
+    constructor()
     {
     }
 
-    ngOnInit() 
+    ngOnInit()
     {
     }
 }

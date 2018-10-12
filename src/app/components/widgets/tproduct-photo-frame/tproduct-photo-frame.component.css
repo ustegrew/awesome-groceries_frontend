@@ -1,4 +1,4 @@
-/* TODO: get image to 
+/* TODO: get image to
              - have no more than 80% of parent's height
              - automatically center in parent, vertically and horizontally, without hard coded margins. */
 
@@ -8,12 +8,13 @@
     border-radius:          10px;
     box-shadow:             0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height:                 calc(100% - 10px);
-    width:                  230px;
+    width:                  360px;
     margin-top:             8px;
 }
 
 #root-img
 {
-    margin-top:             8px;
+    border-radius:          10px;
+    margin-top:             5%;
     height:                 80%
 }

@@ -1,8 +1,10 @@
 button
 {
-    background-color:             #33cc00;
-    width:                          75px;
-    height:                         25px;
+    background-color:             #9ea883;
+    color:                        #ffffff;
+    font-size:                      inherit;
+    height:                         100%;
+    width:                          100%;
     vertical-align:                 middle;
     border-radius:                  5px;
     border:                         0;
@@ -11,6 +13,7 @@ button
 button:hover
 {
     background-color:             #40ff00;
+    color:                        #000000;
 }
 
 button:focus

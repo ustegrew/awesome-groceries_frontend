@@ -1,19 +1,19 @@
-<div id="root">
-	<div id="root-title">
-	    <div id="root-title-name">
+<div class="root-panel">
+	<div class="title">
+	    <div class="title-name">
 	        {{article.fProductType}}
 	    </div>
-	    <div id="root-title-price">
-	        <span>€{{article.fPrice}} / {{article.fPriceUnit}}</span>
+	    <div class="title-price-panel">
+          €{{article.fPrice}} / {{article.fPriceUnit}}
 	    </div>
 	</div>
-	<div id="root-photo">
-		<app-tproduct-photo-frame [urlPhoto]="article.fURLPhotoThumb"></app-tproduct-photo-frame>
+	<div class="photo">
+		<app-tproduct-photo-frame [fUrlPhoto]="article.fURLPhotoThumb"></app-tproduct-photo-frame>
 	</div>
-	<hr id="root-divider"/>
-	<div id="root-menu">
-		<div><app-tview-details-button [fArticleID]="article.fID"></app-tview-details-button></div>
-	    <div><app-tadd-to-cart-button [fArticleID]="article.fID"></app-tadd-to-cart-button></div>
+	<hr class="divider"/>
+	<div class="nav">
+		<div class="nav-details"><app-tview-details-button [fArticleID]="article.fID"></app-tview-details-button></div>
+	  <div class="nav-add-to-cart"><app-tadd-to-cart-button [fArticleID]="article.fID"></app-tadd-to-cart-button></div>
 	</div>
 </div>
 
@@ -28,4 +28,4 @@ article.
     fURLPhotoThumb: string;     // Thumbnail
     fURLPhoto:      string;     // Large photo
  -->
- 
+

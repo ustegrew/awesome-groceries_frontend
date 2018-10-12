@@ -2,14 +2,14 @@
 .modal   /* Cover layer */
 {
     font-family:                sans-serif;
-    left:                       0;                      /* Top left corner of the viewport                      */
+    left:                       0;                            /* Top left corner of the viewport                      */
     top:                        0;
-    width:                      100%;                   /* Fill entire view area                                */
+    width:                      100%;                         /* Fill entire view area                                */
     height:                     100%;
-    position:                   fixed;                  /* Fixed to the same position                           */
-    z-index:                    1;                      /* On top of everything excpt dialog                    */
-    overflow:                   auto;                   /* If page is larger than viewport, enable scrolling    */
-    background-color:           rgba(255,255,255,0.9);  /* White with 90% opacity                               */
+    position:                   fixed;                        /* Fixed to the same position                           */
+    z-index:                    99;                           /* On top of everything excpt dialog                    */
+    overflow:                   auto;                         /* If page is larger than viewport, enable scrolling    */
+    background-color:           rgba(255,255,255,0.75);     /* White with 50% opacity                               */
 }
 .modal-hidden
 {   /* Fade out */
@@ -27,7 +27,7 @@
 {
     font-family:                inherit;
     background-color:           #ffffff;
-    margin:                     5% auto 15% auto;       /* 5% from the top, 15% from the bottom and centered    */
+    margin:                     5% auto 15% auto;             /* 5% from the top, 15% from the bottom and centered    */
     border:                     2px solid #cccccc;
     border-radius:              10px;
     min-width:                  700px;
@@ -68,7 +68,7 @@
     float:                      right;
     transform:                  translate(0px,-10px);
 }
-.title-bar-window-buttons:hover 
+.title-bar-window-buttons:hover
 {
     color:                      #0000ff;
     cursor:                     pointer;

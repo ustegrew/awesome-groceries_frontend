@@ -1,7 +1,11 @@
 button
 {
-    background-color:               #33cc00;
-    width:                          75px;
+    background-image:               url('/assets/misc/component_add-to-shopping-cart_wht.png');
+    background-position:            center center;
+    background-repeat:              no-repeat;
+    background-color:             #9ea883;
+    height:                         100%;
+    width:                          100%;
     padding-top:                    3px;
     vertical-align:                 middle;
     border-radius:                  5px;
@@ -10,7 +14,8 @@ button
 
 button:hover
 {
-    background-color:               #40ff00;
+  background-image:                 url('/assets/misc/component_add-to-shopping-cart_blk.png');
+  background-color:               #40ff00;
 }
 
 button:focus
