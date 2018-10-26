@@ -31,7 +31,7 @@ export class TProduct
         urlPhoto:           string
     )
     {
-        this.fCategory       = new TCategory (categoryID, categoryInformal);
+        this.fCategory       = new TCategory (categoryID, categoryInformal, urlPhotoThumb);
         this.fDetailName     = detailName;
         this.fID             = id;
         this.fPopularity     = popularity;

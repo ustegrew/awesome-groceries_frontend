@@ -21,6 +21,8 @@ import { TFourOhFourComponent                   } from './components/pages/tfour
 import { TDetailsDialogModalComponent           } from './components/widgets/tdetails-dialog-modal/tdetails-dialog-modal.component';
 import { TShoppingCartCounterComponent          } from './components/widgets/tshopping-cart-counter/tshopping-cart-counter.component';
 import { TPriceCounterComponent                 } from './components/widgets/tprice-counter/tprice-counter.component';
+import { TTabRibbonComponent                    } from './components/widgets/ttab-ribbon/ttab-ribbon.component';
+import { TCategoryPanelComponent                } from './components/widgets/tcategory-panel/tcategory-panel.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { TPriceCounterComponent                 } from './components/widgets/tpr
     TFourOhFourComponent,
     TDetailsDialogModalComponent,
     TShoppingCartCounterComponent,
-    TPriceCounterComponent
+    TPriceCounterComponent,
+    TTabRibbonComponent,
+    TCategoryPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +58,10 @@ import { TPriceCounterComponent                 } from './components/widgets/tpr
       TDBService
   ],
   bootstrap: [AppComponent],
-  exports: []
+  exports: [],
+  entryComponents:
+  [
+      TCategoryPanelComponent
+  ]
 })
 export class AppModule { }

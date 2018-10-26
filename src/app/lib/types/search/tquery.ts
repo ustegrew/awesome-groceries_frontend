@@ -1,4 +1,4 @@
-export class TQuery 
+export class TQuery
 {
     fID:                    string;
     fCategory:              string;
@@ -7,17 +7,17 @@ export class TQuery
     public toJSON (): string
     {
         let ret: string;
-        
-        ret = "{" +
-                  "id:"         + this.fID + "," +
-                  "searchTerm:" + this.fSearchTerm + "," +
-                  "category:"   + this.fCategory
-              "}";
-        
+
+        ret = '{' +
+                  'id:'         + this.fID + ',' +
+                  'searchTerm:' + this.fSearchTerm + ',' +
+                  'category:'   + this.fCategory +
+              '}';
+
         return ret;
     }
-    
-    constructor 
+
+    constructor
     (
         id:                         string,
         searchTerm:                 string,

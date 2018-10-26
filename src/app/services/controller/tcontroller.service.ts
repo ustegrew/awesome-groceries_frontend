@@ -1,147 +1,147 @@
 import { Injectable, Inject, forwardRef             } from '@angular/core';
-import { Observable                                 } from 'rxjs';
+import { Observable                                 } from 'rxjs/Observable';
 import { Subject                                    } from 'rxjs/Subject';
 import { TConfig                                    } from '../../tconfig';
 import { TCategory                                  } from '../../lib/types/product/tcategory';
 import { TProduct                                   } from '../../lib/types/product/tproduct';
 import { TQuery                                     } from '../../lib/types/search/tquery';
-import { TProductStoreService                       } from "../product/store/tproduct-store.service";
+import { TProductStoreService                       } from '../product/store/tproduct-store.service';
 
 /**
- * Central controller service. Coordinates all application activities. 
+ * Central controller service. Coordinates all application activities.
  */
 @Injectable()
-export class TControllerService 
+export class TControllerService
 {
     static readonly         kIDCategoryMostPopular: string = TConfig.kIDCategoryMostPopular;
-    static readonly         kIDCategoryAll        : string = TConfig.kIDCategoryAll;
+    static readonly         kIDCategoryAll:         string = TConfig.kIDCategoryAll;
 
-    private fPushCategories     : Subject<TCategory[]>  = null; /* List push updates categories view (e.g. categories box on landing page) */
-    private fPushProducts       : Subject<TProduct[]>   = null; /* List push updates products view (e.g. cards on landing page) */
-    private fPushDetailRequest  : Subject<TProduct>     = null; /* Any product push brings up the details modal dlg */
-    private fQueryID            : string;
-    private fQueryCategory      : string;
-    private fQuerySearchTerm    : string;
-    
+    private fPushCategories:    Subject<TCategory[]>  = null; /* List push updates categories view (e.g. categories box on landing page) */
+    private fPushProducts:      Subject<TProduct[]>   = null; /* List push updates products view (e.g. cards on landing page) */
+    private fPushDetailRequest: Subject<TProduct>     = null; /* Any product push brings up the details modal dlg */
+    private fQueryID:           string;
+    private fQueryCategory:     string;
+    private fQuerySearchTerm:   string;
+
     constructor (private fStore: TProductStoreService) /* [1] [2] */
     {
         this.fPushCategories    = new Subject<TCategory[]> ();
         this.fPushProducts      = new Subject<TProduct[]> ();
         this.fPushDetailRequest = new Subject<TProduct> ();
-        this.fQueryID           = "";
-        this.fQueryCategory     = "";
-        this.fQuerySearchTerm   = "";
+        this.fQueryID           = '';
+        this.fQueryCategory     = '';
+        this.fQuerySearchTerm   = '';
     }
-    
-    queryByID (id: string): TProduct
+
+    queryByID(id: string): TProduct
     {
         let ret: TProduct;
-        
+
         ret = this.fStore.queryByID (id);
-        
+
         return ret;
     }
-    
+
     /**
      * Places an asynchronous request to retrieve the list of categories.
-     * 
-     * Store service will call back on {@link #pushCategories} to 
+     *
+     * Store service will call back on {@link #pushCategories} to
      * broadcast the list via Observable.
-     * 
-     * Interested parties must subscribe {@link #subscribeToPushCategories} to 
+     *
+     * Interested parties must subscribe {@link #subscribeToPushCategories} to
      * category list broadcasts.
-     * 
+     *
      * @param   query               Query object defining the search.
      */
-    queryCategories () : void
+    queryCategories(): void
     {
-        let receptacle : Observable<TCategory[]>;
-        
+        let receptacle: Observable<TCategory[]>;
+
         receptacle = this.fStore.queryCategories ();
+
         receptacle.subscribe
         (
             list => this.fPushCategories.next (list)
         );
     }
-    
+
     /**
      * Places an asynchronous request to retrieve a list of products
      * that match the given search query.
-     * 
-     * Store service will call back on {@link #pushProducts} to 
+     *
+     * Store service will call back on {@link #pushProducts} to
      * broadcast the list via Observable.
-     * 
-     * Interested parties must subscribe {@link #subscribeToPushProducts} to 
+     *
+     * Interested parties must subscribe {@link #subscribeToPushProducts} to
      * product list broadcasts.
-     * 
+     *
      * @param   query               Query object defining the search.
      */
-    queryProducts () : void
+    queryProducts(): void
     {
-        let query       : TQuery;
-        let receptacle  : Observable<TProduct[]>;
-    
+        let query:        TQuery;
+        let receptacle:   Observable<TProduct[]>;
+
         query       = new TQuery (this.fQueryID, this.fQuerySearchTerm, this.fQueryCategory);
         receptacle  = this.fStore.queryProducts (query);
-            
+
         receptacle.subscribe
         (
             list => this.fPushProducts.next (list)
         );
     }
-    
-    setQueryID (id: string)
+
+    setQueryID(id: string): void
     {
         this.fQueryID           = id;
-        this.fQueryCategory     = "";
-        this.fQuerySearchTerm   = "";
+        this.fQueryCategory     = '';
+        this.fQuerySearchTerm   = '';
     }
-    
-    setQueryCategory (category : string)
+
+    setQueryCategory(category: string): void
     {
-        this.fQueryID           = "";
+        this.fQueryID           = '';
         this.fQueryCategory     = category;
     }
-    
-    setQuerySearchTerm (term : string)
+
+    setQuerySearchTerm(term: string): void
     {
-        this.fQueryID           = "";
+        this.fQueryID           = '';
         this.fQuerySearchTerm   = term;
     }
-    
-    showDetails (id: string)
+
+    showDetails(id: string): void
     {
-        let pushed : TProduct;
-        
+        let pushed: TProduct;
+
         pushed = this.fStore.queryByID (id);
-        this.fPushDetailRequest.next (pushed)
+        this.fPushDetailRequest.next (pushed);
     }
-    
-    subscribeToDetailRequests () : Observable<TProduct>
+
+    subscribeToDetailRequests(): Observable<TProduct>
     {
         return this.fPushDetailRequest.asObservable ();
     }
-    
+
     /**
      * Caller subscribes to category push updates, i.e. due to a query
      * or some automatic update from the backend.
-     * 
+     *
      * @return      Observable subscription
      */
-    subscribeToPushCategories () : Observable<TCategory []>
+    subscribeToPushCategories(): Observable<TCategory []>
     {
         return this.fPushCategories.asObservable ();
     }
-    
+
     /**
      * Caller subscribes to product push updates, i.e. due to a query
      * or some automatic update from the backend.
-     * 
+     *
      * @return      Observable subscription
      */
-    subscribeToPushProducts () : Observable<TProduct []>
+    subscribeToPushProducts(): Observable<TProduct []>
     {
         return this.fPushProducts.asObservable ();
     }
 }
-

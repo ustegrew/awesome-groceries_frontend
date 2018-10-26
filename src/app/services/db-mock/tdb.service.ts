@@ -3,7 +3,7 @@ import { TProduct           }               from '../../lib/types/product/tprodu
 import { TQuery             }               from '../../lib/types/search/tquery';
 import { TConfig            }               from '../../tconfig';
 import { Injectable         }               from '@angular/core';
-import { Observable         }               from 'rxjs';
+import { Observable         }               from 'rxjs/Observable';
 
 @Injectable()
 export class TDBService
@@ -503,10 +503,10 @@ export class TDBService
         );
 
         this.fCategories    = new Map ();
-        meta                = new TCategory (TDBService.kIDCategoryMostPopular, 'Most popular');
+        meta                = new TCategory (TDBService.kIDCategoryMostPopular, 'Most popular', 'assets/img/_meta/fav_1.png');
         this.fCategories.set(meta.fID, meta);
 
-        n       = this.fArticles.length;
+        n = this.fArticles.length;
         if (n >= 1)
         {
             for (i = 0; i < n; i++)

@@ -1,8 +1,10 @@
-<div class="root-panel-tint">&nbsp;</div>
 <div class="root-panel">
     <div class="top-bar">
-        <div>
+        <div class="logo">
             <app-tlogo></app-tlogo>
+        </div>
+        <div class="search-box">
+            <app-tsearching></app-tsearching>
         </div>
         <div class="shopping-cart-panel">
             <div class="shopping-cart-button">
@@ -21,13 +23,8 @@
         <mat-divider></mat-divider><!-- predefined: angular material -->
     </div>
 
-    <div class="search-bar">
-        <div class="category-box">
-            <app-tcategory-box></app-tcategory-box>
-        </div>
-        <div class="search-box">
-            <app-tsearch></app-tsearch>
-        </div>
+    <div class="category-bar">
+      <app-ttab-ribbon [fCardModels]="fCategoryModels"></app-ttab-ribbon>
     </div>
 
     <div class="divider">
@@ -37,7 +34,7 @@
     <div class="product-area">
         <!-- FIXME: Product buttons inside block to be left aligned, and
                     whole block of product buttons to be centered in flow panel. -->
-        <div class="product-card" *ngFor="let article of getObserved (); trackBy: getObserved">
+        <div class="product-card" *ngFor="let article of fProducts; trackBy: getProducts">
             <app-tproduct-details-panel [article] = "article"></app-tproduct-details-panel>
         </div>
     </div>

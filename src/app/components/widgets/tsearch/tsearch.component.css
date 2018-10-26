@@ -1,5 +1,15 @@
-#label
+.search
 {
-    color:                          #707070;
-    font-family:                    sans-serif;
+    border-radius:        10px;
+}
+
+.input
+{
+    width:                20em;
+    height:               1.8em;
+    padding-left:         0.5em;
+    font-size:            1.2em;
+    border:               2px solid #cccccc;
+    border-radius:        10px;
+    outline:              none;
 }

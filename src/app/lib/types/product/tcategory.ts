@@ -1,11 +1,13 @@
-export class TCategory 
+export class TCategory
 {
     fID:                    string;
     fInformal:              string;
+    fURLPhotoThumb:         string;
 
-    constructor (id: string, informal: string)
+    constructor (id: string, informal: string, urlPhotoThumb: string)
     {
-        this.fID            = id;
-        this.fInformal      = informal;
+        this.fID                = id;
+        this.fInformal          = informal;
+        this.fURLPhotoThumb     = urlPhotoThumb;
     }
 }

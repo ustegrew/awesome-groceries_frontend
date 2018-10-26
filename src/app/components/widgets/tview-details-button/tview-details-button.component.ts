@@ -21,7 +21,6 @@ export class TViewDetailsButtonComponent implements OnInit
 
     onClick (): void
     {
-        console.log (this.fArticleID);
         this.fController.showDetails (this.fArticleID);
     }
 }

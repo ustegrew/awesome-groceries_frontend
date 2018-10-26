@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter    } from '@angular/core';
-import { Subscription                               } from 'rxjs/Subscription';                     
+import { Subscription                               } from 'rxjs/Subscription';
 import { TControllerService                         } from '../../../services/controller/tcontroller.service';
 import { TCategory }                                  from '../../../lib/types/product/tcategory';
 
@@ -8,39 +8,37 @@ import { TCategory }                                  from '../../../lib/types/p
   templateUrl: './tcategory-box.component.html',
   styleUrls: ['./tcategory-box.component.css']
 })
-export class TCategoryBoxComponent implements OnInit 
+export class TCategoryBoxComponent implements OnInit
 {
-    private fCategories                 : TCategory[];
-    private fDataSource                 : Subscription;
-    
+    private fCategories: TCategory [];
+    private fDataSource: Subscription;
+
     constructor (private fController: TControllerService)
     {
-        let instance: TCategoryBoxComponent = this;
-    
-        fController.subscribeToPushCategories().subscribe 
+        fController.subscribeToPushCategories().subscribe
         (
             list => this.fCategories = list
         );
     }
 
-    ngOnInit() 
+    ngOnInit()
     {
         this.fController.queryCategories ();
     }
-    
+
     /**
      * Returns the list of categories. Used (and observed) from this component's HTML template
-     * (trackBy directive). This means, whenever the categories change the UI refreshes 
+     * (trackBy directive). This means, whenever the categories change the UI refreshes
      * automatically
-     * 
+     *
      * @return          list of category items
      */
-    getCategories() : TCategory[]
+    getCategories(): TCategory[]
     {
         return this.fCategories;
     }
-    
-    onChangeValue (choice: string) : void
+
+    onChangeValue (choice: string): void
     {
         this.fController.setQueryCategory   (choice);
         this.fController.queryProducts      ();

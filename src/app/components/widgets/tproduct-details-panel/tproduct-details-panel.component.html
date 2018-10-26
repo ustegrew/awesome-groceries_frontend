@@ -1,20 +1,21 @@
 <div class="root-panel">
-	<div class="title">
-	    <div class="title-name">
-	        {{article.fProductType}}
-	    </div>
-	    <div class="title-price-panel">
-          €{{article.fPrice}} / {{article.fPriceUnit}}
-	    </div>
-	</div>
-	<div class="photo">
-		<app-tproduct-photo-frame [fUrlPhoto]="article.fURLPhotoThumb"></app-tproduct-photo-frame>
-	</div>
-	<hr class="divider"/>
-	<div class="nav">
-		<div class="nav-details"><app-tview-details-button [fArticleID]="article.fID"></app-tview-details-button></div>
-	  <div class="nav-add-to-cart"><app-tadd-to-cart-button [fArticleID]="article.fID"></app-tadd-to-cart-button></div>
-	</div>
+    <div class="title" (click)="onClick()">
+        <div class="title-name">
+            {{article.fProductType}}
+        </div>
+        <div class="title-price-panel">
+            €{{article.fPrice}} / {{article.fPriceUnit}}
+        </div>
+    </div>
+    <div class="photo" (click)="onClick()">
+      <app-tproduct-photo-frame [fUrlPhoto]="article.fURLPhotoThumb"></app-tproduct-photo-frame>
+    </div>
+    <hr class="divider" (click)="onClick()"/>
+    <div class="nav">
+        <div class="nav-click-target" (click)="onClick()">&nbsp;</div>
+        <div class="nav-details"><app-tview-details-button [fArticleID]="article.fID"></app-tview-details-button></div>
+        <div class="nav-add-to-cart"><app-tadd-to-cart-button [fArticleID]="article.fID"></app-tadd-to-cart-button></div>
+    </div>
 </div>
 
 <!--
