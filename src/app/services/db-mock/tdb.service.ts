@@ -353,7 +353,7 @@ export class TDBService
             new TProduct
             (
                 '06',
-                'Drinks & Beverages',
+                'Drinks',
                 'Healthy choice',
                 'e7f5',
                 0.68,

@@ -127,13 +127,6 @@ export class TTabRibbonComponent implements OnInit, OnChanges, AfterContentInit
                     cm        = this.fTarget.createComponent (cFactory);
                     cm.instance.fCategory = e.fData;
                 }
-                for (i = 0; i < n; i++)
-                {
-                    e         = this.fCardModels [i];
-                    cFactory  = this.fResolver.resolveComponentFactory (e.fComponent);
-                    cm        = this.fTarget.createComponent (cFactory);
-                    cm.instance.fCategory = e.fData;
-                }
             }
         }
     }

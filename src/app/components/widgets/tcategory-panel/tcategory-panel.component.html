@@ -1,3 +1,8 @@
 <div class="root-panel">
-    {{fCategory.fID}}:{{fCategory.fInformal}}
+    <div class="photo">
+        <app-tproduct-photo-frame [fUrlPhoto]="fCategory.fURLPhotoThumb"></app-tproduct-photo-frame>
+    </div>
+    <div class="title">
+        {{fCategory.fInformal}}
+    </div>
 </div>

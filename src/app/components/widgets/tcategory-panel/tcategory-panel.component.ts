@@ -1,5 +1,6 @@
-import { Component, OnInit          } from '@angular/core';
-import { TCategory                  } from '../../../lib/types/product/tcategory';
+import { Component, OnInit              } from '@angular/core';
+import { TProductPhotoFrameComponent    } from '../tproduct-photo-frame/tproduct-photo-frame.component';
+import { TCategory                      } from '../../../lib/types/product/tcategory';
 
 @Component({
   selector: 'app-tcategory-panel',
