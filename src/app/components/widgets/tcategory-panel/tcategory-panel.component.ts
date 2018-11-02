@@ -9,7 +9,12 @@ import { TCategory                      } from '../../../lib/types/product/tcate
 })
 export class TCategoryPanelComponent implements OnInit
 {
-    fCategory:  TCategory;
+    fCategory:          TCategory;
+    fStylesPhoto =
+    {
+        rootPanel:  {paddingTop: '5px', paddingBottom: '5px'},
+        photo:      {}
+    };
 
     constructor ()
     {

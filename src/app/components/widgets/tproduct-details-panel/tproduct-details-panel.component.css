@@ -63,11 +63,12 @@
 
 .photo
 {
-    height:                       200px;
+    height:                       160px;
     display:                      flex;
     justify-content:              center;
     align-content:                center;
-    margin-bottom:                15px;
+    margin-top:                   10px;
+    margin-bottom:                40px;
 }
 
 .divider

@@ -1,3 +1,3 @@
-<div class="root-panel">
-	  <img class="photo" src="{{fUrlPhoto}}"/>
+<div [ngStyle]="!!fStyles && fStyles.rootPanel" class="root-panel">
+	  <img [ngStyle]="!!fStyles && fStyles.photo" class="photo" src="{{fUrlPhoto}}"/>
 </div>

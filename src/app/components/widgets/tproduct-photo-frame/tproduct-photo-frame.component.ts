@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TProduct                 } from '../../../lib/types/product/tproduct';
+import { ICustomStyle             } from './icustom-style';
 
 @Component({
   selector: 'app-tproduct-photo-frame',
@@ -8,7 +9,8 @@ import { TProduct                 } from '../../../lib/types/product/tproduct';
 })
 export class TProductPhotoFrameComponent implements OnInit
 {
-    @Input() fUrlPhoto: string;
+    @Input()          fUrlPhoto:  string;
+    @Input()          fStyles:    ICustomStyle;
 
     constructor()
     {
