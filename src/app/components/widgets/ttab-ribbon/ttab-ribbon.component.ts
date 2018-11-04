@@ -65,7 +65,6 @@ export class TTabRibbonComponent implements OnInit, OnChanges, AfterContentInit
     {
         this.fCanUpdate = true;
         this.createCards ();
-        console.log (this.fCardModels);
     }
 
     ngOnChanges(changes: SimpleChanges): void
@@ -87,7 +86,6 @@ export class TTabRibbonComponent implements OnInit, OnChanges, AfterContentInit
 
     onMouseMove (event): void
     {
-        /* console.log (event.x + '/' + event.offsetY); */
         this.fX = event.x;
     }
 

@@ -7,6 +7,7 @@ import { switchMap                              } from 'rxjs/operators';
 import { Observable                             } from 'rxjs/Observable';
 import { TControllerService                     } from '../../../services/controller/tcontroller.service';
 import { TQuery                                 } from '../../../lib/types/search/tquery';
+import 'rxjs/add/observable/of';
 
 @Component({
     selector: 'app-tsearching',

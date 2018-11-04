@@ -13,10 +13,13 @@
 
 .scrollable-panel
 {
-    margin:                     25px;
+    padding-left:                30px;
+    margin-top:                 25px;
+    margin-bottom:              25px;
+    margin-right:               25px;
     display:                    grid;
     grid-template-columns:      repeat(50, 200px);
-    grid-gap:                   10px;
+    grid-gap:                   15px;
     justify-content:            start;
     overflow:                   hidden;
 }

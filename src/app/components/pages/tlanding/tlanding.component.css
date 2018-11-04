@@ -71,6 +71,7 @@
     width:                        80%;
     display:                      flex;
     flex-wrap:                    wrap;
+    top:                          15px;
 }
 
 .product-card

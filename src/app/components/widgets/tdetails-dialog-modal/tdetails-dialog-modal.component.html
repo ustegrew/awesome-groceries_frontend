@@ -15,8 +15,8 @@
                 <div class="main-body-product-info-value">€{{fProduct.fPrice}}</div>
                 <div>&nbsp;</div>
                 <div class="main-body-actions">
-                    <input id="txtamount" type="number" min="1" value="1">
-                    <button id="btnaddtocart">Add</button>
+                    <input id="txtamount" type="number" min="1" [(ngModel)]="fDataNumArticlesAdd">
+                    <button id="btnaddtocart" (click)="addToCart()">Add</button>
                 </div>
             </div>
         </div>

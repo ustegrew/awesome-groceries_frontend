@@ -5,21 +5,21 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './tadd-to-cart-button.component.html',
   styleUrls: ['./tadd-to-cart-button.component.css']
 })
-export class TAddToCartButtonComponent implements OnInit 
+export class TAddToCartButtonComponent implements OnInit
 {
     @Input() fArticleID: string;
 
-    constructor() 
+    constructor()
     {
-      
+
     }
 
-    ngOnInit() 
+    ngOnInit()
     {
     }
-  
+
     onClick (): void
     {
-        console.log ("Add one qty to cart: " + this.fArticleID);
+        console.log ('Add one qty to cart: ' + this.fArticleID);
     }
 }

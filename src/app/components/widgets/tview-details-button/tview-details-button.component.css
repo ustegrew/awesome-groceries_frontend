@@ -8,6 +8,7 @@ button
     vertical-align:                 middle;
     border-radius:                  5px;
     border:                         0;
+    cursor:                         inherit;
 }
 
 button:hover

@@ -1,6 +1,7 @@
 import { Component, OnInit              } from '@angular/core';
 import { TProductPhotoFrameComponent    } from '../tproduct-photo-frame/tproduct-photo-frame.component';
 import { TCategory                      } from '../../../lib/types/product/tcategory';
+import { TControllerService             } from '../../../services/controller/tcontroller.service';
 
 @Component({
   selector: 'app-tcategory-panel',
@@ -16,12 +17,18 @@ export class TCategoryPanelComponent implements OnInit
         photo:      {}
     };
 
-    constructor ()
+    constructor (private fController: TControllerService)
     {
 
     }
 
     ngOnInit()
     {
+    }
+
+    onClick ()
+    {
+        this.fController.setQueryCategory (this.fCategory.fID);
+        this.fController.queryProducts ();
     }
 }
